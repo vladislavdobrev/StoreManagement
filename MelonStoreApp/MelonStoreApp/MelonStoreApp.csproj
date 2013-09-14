@@ -150,7 +150,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\shoe.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\logo.jpg" />
   </ItemGroup>

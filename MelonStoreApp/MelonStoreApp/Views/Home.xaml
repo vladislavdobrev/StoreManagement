@@ -14,7 +14,6 @@
                 
             </TabItem>
             <TabItem Header="Warehouse"></TabItem>
-            <TabItem Header=""
         </TabControl>
     </Grid>
 </UserControl>

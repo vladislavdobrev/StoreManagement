@@ -4,12 +4,17 @@
         xmlns:local="clr-namespace:MelonStoreApp"
         xmlns:views="clr-namespace:MelonStoreApp.Views"
         
-        Title="MainWindow" Height="350" Width="525">
+        Title="MelonMegastore" Height="350" Width="500">
     <Grid>
         <ItemsControl Margin="10,0,-10,0">
-            <views:Login/>
+        <ItemsControl.Items>
+            <!--<views:Login/>
             <views:Register/>
-            <views:Home/>
+            <views:Home/>-->
+                <views:HighLights>
+
+                </views:HighLights>
+            </ItemsControl.Items>
         </ItemsControl>
 
     </Grid>
