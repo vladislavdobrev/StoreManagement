@@ -11,7 +11,7 @@ using MelonStore.Models;
 
 namespace MelonStore.Api.Controllers
 {
-    //[EnableCors(origins: "http://localhost:57351/", headers: "*", methods: "*")]
+    //[EnableCors(origins: "http://localhost:1671/", headers: "*", methods: "*")]
     public class UsersController : BaseController
     {
         private readonly IUserRepository data;
@@ -33,7 +33,8 @@ namespace MelonStore.Api.Controllers
 
         [HttpPost]
         [ActionName("register")]
-        public HttpResponseMessage RegisterUser([FromBody]UserRegisterModel model)
+        public HttpResponseMessage RegisterUser([FromBody]
+                                                UserRegisterModel model)
         {
             return base.PerformOperationAndHandleExceptions(() =>
             {
@@ -54,102 +55,39 @@ namespace MelonStore.Api.Controllers
             });
         }
 
-        //[HttpPost]
-        //[ActionName("login")]
-        //public HttpResponseMessage LoginUser([FromBody]UserLoginModel model)
-        //{
-        //    return base.PerformOperationAndHandleExceptions(() =>
-        //    {
-        //        if (!ModelState.IsValid)
-        //        {
-        //            throw new Exception("Invalid user login model!");
-        //        }
+        [HttpPost]
+        [ActionName("login")]
+        public HttpResponseMessage LoginUser([FromBody]
+                                             UserLoginModel model)
+        {
+            return base.PerformOperationAndHandleExceptions(() =>
+            {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception("Invalid user login model!");
+                }
+                User dbUser = this.data.Get(model.Username);
+                if (dbUser == null || model.Password != dbUser.Password)
+                {
+                    throw new Exception("Invalid username or password!");
+                }
+                User loggedUser = this.data.LoginUser(dbUser);
+                UserLoggedModel loggedModel = UserLoggedModel.CreateModel(loggedUser);
+                var response = this.Request.CreateResponse<UserLoggedModel>(HttpStatusCode.OK, loggedModel);
+                return response;
+            });
+        }
 
-        //        User dbUser = this.data.Get(model.Nickname);
-
-        //        if (dbUser == null || model.Password != dbUser.Password)
-        //        {
-        //            throw new Exception("Invalid nickname or password!");
-        //        }
-
-        //        User loggedUser = this.data.LoginUser(dbUser);
-        //        UserLoggedModel loggedModel = UserLoggedModel.CreateModel(loggedUser);
-
-        //        var response = this.Request.CreateResponse<UserLoggedModel>(HttpStatusCode.OK, loggedModel);
-        //        return response;
-        //    });
-        //}
-
-        //[HttpGet]
-        //[ActionName("logout")]
-        //public HttpResponseMessage LogoutUser(string sessionKey)
-        //{
-        //    return base.PerformOperationAndHandleExceptions(() =>
-        //    {
-        //        this.data.LogoutUser(sessionKey);
-
-        //        var response = this.Request.CreateResponse(HttpStatusCode.OK, "User logged out successfully");
-        //        return response;
-        //    });
-        //}
-
-        //[HttpPost]
-        //[ActionName("add-contact")]
-        //public HttpResponseMessage AddContact(string sessionKey, [FromBody] string nickname)
-        //{
-        //    return base.PerformOperationAndHandleExceptions(() =>
-        //    {
-        //        if (string.IsNullOrWhiteSpace(nickname) || nickname == string.Empty)
-        //        {
-        //            throw new Exception("Invalid nickname!");
-        //        }
-
-        //        this.data.AddContact(sessionKey, nickname);
-
-        //        var response = this.Request.CreateResponse(HttpStatusCode.OK, "Contact added successfully");
-        //        return response;
-        //    });
-        //}
-
-        //[HttpGet]
-        //[ActionName("get-contacts")]
-        //public IQueryable<UserModel> GetContacts(string sessionKey)
-        //{
-        //    return base.PerformOperationAndHandleExceptions(() =>
-        //    {
-        //        var userContacts = this.data.GetContacts(sessionKey).Select(UserModel.FromUser);
-
-        //        return userContacts;
-        //    });
-        //}
-
-        //[HttpGet]
-        //[ActionName("get")]
-        //public UserDetails Get(int id)
-        //{
-        //    return base.PerformOperationAndHandleExceptions(() =>
-        //    {
-        //        var user = this.data.Get(id);
-        //        var userModel = UserDetails.CreateModel(user);
-
-        //        return userModel;
-        //    });
-        //}
-
-        //private string UploadImageToCloudinary(string url)
-        //{
-        //    m_account = new Account("haiubldgg", "235176581338859", "LqSoe-u4wR4g8dFSOQGT3YBrCbM");
-        //    m_cloudinary = new CloudinaryDotNet.Cloudinary(m_account);
-        //    m_testImagePath = url;
-
-        //    ImageUploadParams uploadParams = new ImageUploadParams()
-        //    {
-        //        File = new FileDescription(m_testImagePath),
-        //        Tags = "remote"
-        //    };
-
-        //    ImageUploadResult uploadResult = m_cloudinary.Upload(uploadParams);
-        //    return uploadResult.Uri.AbsoluteUri;
-        //}
+        [HttpPut]
+        [ActionName("logout")]
+        public HttpResponseMessage LogoutUser(string sessionKey)
+        {
+            return base.PerformOperationAndHandleExceptions(() =>
+            {
+                this.data.LogoutUser(sessionKey);
+                var response = this.Request.CreateResponse(HttpStatusCode.OK, "User logged out successfully");
+                return response;
+            });
+        }
     }
 }
