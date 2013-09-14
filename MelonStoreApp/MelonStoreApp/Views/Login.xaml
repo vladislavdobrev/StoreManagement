@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:MelonStoreApp.Views"
              mc:Ignorable="d" 
-<<<<<<< HEAD
-             >
+              d:DesignHeight="300" d:DesignWidth="300">
+    
     <UserControl.Resources>
         <Style TargetType="TextBlock" x:Key="textBlockStyle">
             <Setter Property="TextAlignment" Value="Right"/>
@@ -39,12 +40,4 @@
         <Button Width="100" Margin="10">Login</Button>
         <Button Width="100" Margin="0,0,0,10">Register</Button>
     </StackPanel>
-
-
-=======
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
->>>>>>> 146595f408dc0febc521f19e0c1f8ca51a85ce81
 </UserControl>

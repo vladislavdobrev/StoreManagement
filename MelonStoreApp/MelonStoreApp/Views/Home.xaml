@@ -7,7 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-<<<<<<< HEAD
         <TabControl>
             <TabItem Header="Highlights" IsSelected="True">
                 <views:HighLights/>
@@ -25,8 +24,5 @@
                 <views:Product/>
             </TabItem>
         </TabControl>
-=======
-            
->>>>>>> 146595f408dc0febc521f19e0c1f8ca51a85ce81
     </Grid>
 </UserControl>
