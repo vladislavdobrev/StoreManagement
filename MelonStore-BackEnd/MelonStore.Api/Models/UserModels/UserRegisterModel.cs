@@ -12,12 +12,16 @@
         [DataMember(Name = "password")]
         public string Password { get; set; }
 
+        [DataMember(Name = "storeId")]
+        public int StoreId { get; set; }
+
         public User ToUser()
         {
             User user = new User()
             {
                 Username = this.Username,
-                Password = this.Password
+                Password = this.Password,
+                Store_Id = this.StoreId
             };
 
             return user;
