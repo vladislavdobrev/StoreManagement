@@ -14,9 +14,10 @@
         <Style TargetType="TextBox" x:Key="textBoxStyle">
             <Setter Property="Margin" Value="10"/>
             <Setter Property="Width" Value="100"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
     </UserControl.Resources>
-    <StackPanel>
+    <StackPanel Width="300">
         <Border Background="PaleGreen" Width="100" Height="100" Margin="20">
             <Image/>
         </Border>
@@ -34,7 +35,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Store" Grid.Row="0" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
-            <ComboBox Grid.Row="0" Grid.Column="1" Margin="10"/>
+            <ComboBox Grid.Row="0" Grid.Column="1" Margin="10" Width="100" HorizontalAlignment="Left"/>
 
             <TextBlock Text="Username" Grid.Row="1" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
             <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource textBoxStyle}"/>
