@@ -4,10 +4,10 @@
         xmlns:local="clr-namespace:MelonStoreApp"
         xmlns:views="clr-namespace:MelonStoreApp.Views"
         
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow"  Height="600" Width="800">
     <Grid>
         
-            <views:Register/>
+            <views:Login/>
         
     </Grid>
 </Window>
