@@ -9,9 +9,9 @@
     <Grid>
         <ItemsControl >
             <ItemsControl.Items>
-                <views:HighLights/>
-                <!--<views:Register Visibility="{Binding}"/>
-                <views:Home Visibility="{Binding}"/>-->
+                <views:Login Visibility="{Binding LoginVisibility}"/>
+                <views:Register Visibility="{Binding RegisterVisibility}"/>
+                <views:Home Visibility="{Binding HomeVisibility}"/>
             </ItemsControl.Items>
         </ItemsControl>
 
