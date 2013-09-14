@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MelonStoreApp.ViewModels
 {
-    abstract class ViewModelBase : INotifyPropertyChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

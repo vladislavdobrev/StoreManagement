@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="400">
     <StackPanel Orientation="Horizontal">
-        <Image Source="..\Images\shoe.jpg" Width="200" Height="300" HorizontalAlignment="Left"></Image>
+        <Image Source="..\Image\shoe.jpg" Width="200" Height="300" HorizontalAlignment="Left"></Image>
         <Grid>
             <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
