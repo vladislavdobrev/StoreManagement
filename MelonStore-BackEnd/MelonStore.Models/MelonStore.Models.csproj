@@ -43,6 +43,7 @@
     <Compile Include="Image.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Store.cs" />
+    <Compile Include="StoreProduct.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
