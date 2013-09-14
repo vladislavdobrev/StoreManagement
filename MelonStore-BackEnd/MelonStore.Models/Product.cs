@@ -13,8 +13,10 @@ namespace MelonStore.Models
         public int? Count { get; set; }
         public decimal? Price { get; set; }
         public decimal BasePrice { get; set; }
+        public Nullable<int> Image_Id { get; set; }
         public virtual Image Image { get; set; }
-        public virtual ICollection<Store> Store { get; set; }
+        public virtual ICollection<ProductStore> ProductStores { get; set; }
+        public DateTime DateAdded { get; set; }
 
     }
 }

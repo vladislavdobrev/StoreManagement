@@ -1,21 +1,19 @@
 ﻿<Window x:Class="MelonStoreApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:MelonStoreApp"
-        xmlns:views="clr-namespace:MelonStoreApp.Views"
-        
-        Title="MelonMegastore" Height="350" Width="500">
+        Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <ItemsControl Margin="10,0,-10,0">
-        <ItemsControl.Items>
-            <!--<views:Login/>
-            <views:Register/>
-            <views:Home/>-->
-                <views:HighLights>
-
-                </views:HighLights>
+<<<<<<< HEAD
+        <ItemsControl >
+            <ItemsControl.Items>
+                <!--<views:Login/>
+                <views:Register/>-->
+                <views:Home/>
             </ItemsControl.Items>
         </ItemsControl>
 
+=======
+        
+>>>>>>> 146595f408dc0febc521f19e0c1f8ca51a85ce81
     </Grid>
 </Window>
