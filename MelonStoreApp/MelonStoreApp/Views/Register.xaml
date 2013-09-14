@@ -4,8 +4,48 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+             d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Key="textBlockStyle">
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="textBoxStyle">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Width" Value="100"/>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <Border Background="PaleGreen" Width="100" Height="100" Margin="20">
+            <Image/>
+        </Border>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Store" Grid.Row="0" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
+            <ComboBox Grid.Row="0" Grid.Column="1" Margin="10"/>
+
+            <TextBlock Text="Username" Grid.Row="1" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource textBoxStyle}"/>
+
+            <TextBlock Text="Password" Grid.Row="2" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource textBoxStyle}"/>
+
+            <TextBlock Text="Repeat Password" Grid.Row="3" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource textBoxStyle}"/>
+
+        </Grid>
+        <Button Content="Register" Width="100" Margin="20"/>
+    </StackPanel>
 </UserControl>
