@@ -44,6 +44,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -160,11 +161,17 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserLoggedModel.cs" />
+    <Compile Include="Models\UserLoginModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserRegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -282,10 +289,23 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MelonStore.Data\MelonStore.Data.csproj">
+      <Project>{2bdf74ca-3da0-43ac-b6e0-d990b39d77bd}</Project>
+      <Name>MelonStore.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MelonStore.Models\MelonStore.Models.csproj">
+      <Project>{ddeda995-34c7-4bc9-9b1c-66d7f451939c}</Project>
+      <Name>MelonStore.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MelonStore.Repositories\MelonStore.Repositories.csproj">
+      <Project>{66bcd22a-370b-48f4-ad48-05bb1e4b1265}</Project>
+      <Name>MelonStore.Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

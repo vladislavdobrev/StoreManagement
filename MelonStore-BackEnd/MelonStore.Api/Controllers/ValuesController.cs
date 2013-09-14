@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MelonStore.Data;
+using MelonStore.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,6 +11,24 @@ namespace MelonStore.Api.Controllers
 {
     public class ValuesController : ApiController
     {
+        private readonly IUserRepository data;
+
+        public ValuesController()
+        {
+            this.data = new DbUsersRepository(new MelonStoreContext());
+        }
+
+        public ValuesController(IUserRepository repository)
+        {
+            if (repository == null)
+            {
+                throw new ArgumentNullException("Invalid repository! It cannot be null!");
+            }
+
+            this.data = repository;
+        }
+
+
         // GET api/values
         public IEnumerable<string> Get()
         {

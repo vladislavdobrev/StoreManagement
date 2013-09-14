@@ -10,6 +10,18 @@ namespace MelonStore.Api
         public static void Register(HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(
+                   name: "UsersGetApi",
+                   routeTemplate: "api/users/get/{id}",
+                   defaults: new { controller = "users" }
+               );
+
+            config.Routes.MapHttpRoute(
+                   name: "UsersApi",
+                   routeTemplate: "api/users/{action}/{sessionKey}",
+                   defaults: new { controller = "users" }
+               );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
