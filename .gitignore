@@ -1,9 +1,4 @@
-/MelonStore-BackEnd/MelonStore.Data/obj
-/MelonStore-BackEnd/MelonStore.Data/bin
+/MelonStoreApp/MelonStoreApp.v11.suo
 
-/MelonStore-BackEnd/MelonStore.Models/bin
-/MelonStore-BackEnd/MelonStore.Models/obj
-
-/MelonStore-BackEnd/MelonStore.Repositories/bin
-/MelonStore-BackEnd/MelonStore.Repositories/obj
-/MelonStore-BackEnd/MelonStore-BackEnd.v11.suo
+/MelonStoreApp/MelonStoreApp/obj
+/MelonStoreApp/MelonStoreApp/bin
