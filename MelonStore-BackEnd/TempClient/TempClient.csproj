@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2BDF74CA-3DA0-43AC-B6E0-D990B39D77BD}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{74A9438A-1D56-44C7-B354-58A6FE6DF251}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MelonStore.Data</RootNamespace>
-    <AssemblyName>MelonStore.Data</AssemblyName>
+    <RootNamespace>TempClient</RootNamespace>
+    <AssemblyName>TempClient</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -37,8 +39,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,12 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mapping\ImageMap.cs" />
-    <Compile Include="Mapping\ProductMap.cs" />
-    <Compile Include="Mapping\ProductStoreMap.cs" />
-    <Compile Include="Mapping\StoreMap.cs" />
-    <Compile Include="Mapping\UserMap.cs" />
-    <Compile Include="MelonStoreContext.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,13 +54,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MelonStore.Data\MelonStore.Data.csproj">
+      <Project>{2bdf74ca-3da0-43ac-b6e0-d990b39d77bd}</Project>
+      <Name>MelonStore.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MelonStore.Models\MelonStore.Models.csproj">
       <Project>{ddeda995-34c7-4bc9-9b1c-66d7f451939c}</Project>
       <Name>MelonStore.Models</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
