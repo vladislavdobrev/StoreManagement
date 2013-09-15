@@ -2,3 +2,14 @@
 
 /MelonStoreApp/MelonStoreApp/obj
 /MelonStoreApp/MelonStoreApp/bin
+
+/MelonStore-BackEnd/MelonStore.Api/bin
+/MelonStore-BackEnd/MelonStore.Api/obj
+/MelonStore-BackEnd/MelonStore.Data/bin
+/MelonStore-BackEnd/MelonStore.Data/obj
+/MelonStore-BackEnd/MelonStore.Models/bin
+/MelonStore-BackEnd/MelonStore.Models/obj
+/MelonStore-BackEnd/MelonStore.Repositories/bin
+/MelonStore-BackEnd/MelonStore.Repositories/obj
+/MelonStore-BackEnd/TempClient/bin
+/MelonStore-BackEnd/TempClient/obj

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using MelonStore.Api.Models.StoreModels;
+using MelonStore.Data;
+using MelonStore.Models;
+using MelonStore.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,6 +13,29 @@ namespace MelonStore.Api.Controllers
 {
     public class StoresController : ApiController
     {
+        private DbStoreRepository repo;
+        private MelonStoreContext context;
 
+        public StoresController()
+        {
+            this.context = new MelonStoreContext();
+            this.repo = new DbStoreRepository(context);
+        }
+
+
+        [ActionName("all")]
+        public HttpResponseMessage GetAll()
+        {
+            IQueryable<Store> dbStores = this.repo.All();
+            ICollection<StoreApiModel> stores =
+                (from currStore in dbStores
+                 select new StoreApiModel()
+                 {
+                     Name = currStore.Name,
+                     Id = currStore.Id
+                 }).ToList();
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, stores);
+        }
     }
 }

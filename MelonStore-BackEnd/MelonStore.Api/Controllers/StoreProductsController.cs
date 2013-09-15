@@ -38,31 +38,21 @@ namespace MelonStore.Api.Controllers
             return this.Request.CreateResponse(HttpStatusCode.Created);
         }
 
-        [ActionName("buy")]
-        public HttpResponseMessage PutBuy(int productId, int storeId, ProductStoreApiSellBuyModel product)
+        [ActionName("update")]
+        public HttpResponseMessage PutUpdate(int productId, int storeId, ProductStoreApiSellBuyModel product)
         {
             ProductStore convertedProduct = new ProductStore()
             {
                  Price = product.Price,
                  Count = product.Count,
             };
+
             this.repo.Update(productId, storeId, convertedProduct);
 
             return this.Request.CreateResponse(HttpStatusCode.OK, convertedProduct);
         }
 
-        [ActionName("sell")]
-        public HttpResponseMessage PutSell(int productId, int storeId, ProductStoreApiSellBuyModel productModel)
-        {
-            // sell -> 
-            productModel.Price = -(productModel.Price);
-            productModel.DateSold = DateTime.Now;
-            ProductStore convertedProduct = Searilizator.Searilize<ProductStore, ProductStoreApiSellBuyModel>(productModel);
-            this.repo.Update(productId, storeId, convertedProduct);
-
-            return this.Request.CreateResponse(HttpStatusCode.OK, convertedProduct);
-        }
-
+       
         [ActionName("all")]
         public HttpResponseMessage GetAll()
         {

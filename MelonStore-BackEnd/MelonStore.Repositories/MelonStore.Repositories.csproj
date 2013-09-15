@@ -46,6 +46,10 @@
   <ItemGroup>
     <Compile Include="Image\DbImagesRepository.cs" />
     <Compile Include="ProductStore\DbProductRepository.cs" />
+    <Compile Include="Product\DbProductRepository.cs" />
+    <Compile Include="Product\IProductRepository.cs" />
+    <Compile Include="Store\DbStoreRepository.cs" />
+    <Compile Include="Store\IStoreRepository.cs" />
     <Compile Include="User\DbUsersRepository.cs" />
     <Compile Include="ProductStore\IProductStoreRepository.cs" />
     <Compile Include="IRepository.cs" />

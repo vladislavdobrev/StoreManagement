@@ -33,12 +33,12 @@ namespace MelonStore.Repositories
         {
             IQueryable<ProductStore> all = this.All();
 
-            IQueryable productStore = from current in all
+            ProductStore productStore = (from current in all
                                       where current.Product_Id == productId &&
                                       current.Store_Id == storeId
-                                      select current;
+                                      select current).FirstOrDefault() ;
 
-            return productStore as ProductStore;
+            return productStore;
 
         }
 
@@ -55,6 +55,8 @@ namespace MelonStore.Repositories
             ProductStore fromDb = this.Get(productId, storeId);
             fromDb.Price = item.Price;
             fromDb.Count = fromDb.Count + item.Count;
+
+            this.Context.Entry(fromDb).State = System.Data.EntityState.Modified;
 
             this.Context.SaveChanges();
         }
