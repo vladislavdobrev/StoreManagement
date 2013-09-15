@@ -22,7 +22,7 @@ namespace MelonStoreApp
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
     }
 }

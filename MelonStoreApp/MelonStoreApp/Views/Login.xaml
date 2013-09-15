@@ -4,40 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:views="clr-namespace:MelonStoreApp.Views"
-             mc:Ignorable="d" 
-              d:DesignHeight="300" d:DesignWidth="300">
-    
+             xmlns:viewModels="clr-namespace:MelonStoreApp.ViewModels"
+             mc:Ignorable="d" >
+
+    <!--<UserControl.DataContext>
+        <viewModels:LoginViewModel/>
+    </UserControl.DataContext>-->
+
     <UserControl.Resources>
         <Style TargetType="TextBlock" x:Key="textBlockStyle">
             <Setter Property="TextAlignment" Value="Right"/>
             <Setter Property="Margin" Value="10"/>
         </Style>
 
-        <Style TargetType="TextBox" x:Key="textBoxStyle">
-            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="Width" Value="100"/>
-        </Style>
+
     </UserControl.Resources>
+
     <StackPanel Width="300">
         <Image Source="../Image/logo.jpg" Width="200" Height="140" Margin="0,0,0,40"></Image>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="32*"></ColumnDefinition>
-                <ColumnDefinition Width="43*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource textBlockStyle}">Username:</TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource textBlockStyle}">Password:</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource textBoxStyle}" Margin="10,10,0,10"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource textBoxStyle}" Margin="10,10,0,10"></TextBox>
-
+            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource textBlockStyle}" Text="Username"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource textBlockStyle}" Text="Password"/>
+            <TextBox Grid.Row="0" Grid.Column="1"     HorizontalAlignment="Left" Width="100" Margin="10"/>
+            <PasswordBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="100" Margin="10"/>
         </Grid>
-        <Button Width="100" Margin="10">Login</Button>
-        <Button Width="100" Margin="0,0,0,10">Register</Button>
+        <TextBlock Text="Invalid username or password." Foreground="Red" TextAlignment="Center" Visibility="{Binding IsUserValid}"/>
+        <Button Width="100" Margin="0,20,0,10" Command="{Binding LoginCommand}" Content="Login"/>
+        <Button Width="100" Margin="0,0,0,20" Command="{Binding RegisterCommand}" Content="Register"/>
     </StackPanel>
 </UserControl>
