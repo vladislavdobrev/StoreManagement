@@ -23,7 +23,6 @@ namespace MelonStoreApp
         public MainWindow()
         {
             InitializeComponent();
-            //asdasd
         }
     }
 }
