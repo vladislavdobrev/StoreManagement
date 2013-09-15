@@ -3,18 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:MelonStoreApp.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <TabControl>
-            <TabItem Header="Highlights">
-                
+            <TabItem Header="Highlights" IsSelected="True">
+                <views:HighLights/>
             </TabItem>
             <TabItem Header="MyStore">
-                
+                <views:MyStore/>
             </TabItem>
-            <TabItem Header="Warehouse"></TabItem>
-            <TabItem Header=""
+            <TabItem Header="Warehouse">
+                <views:Warehouse/>
+            </TabItem>
+            <TabItem Header="Cart">
+                <views:Cart/>
+            </TabItem>
+            <TabItem Header="Product">
+                <views:Product/>
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

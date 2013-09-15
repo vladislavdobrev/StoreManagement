@@ -6,10 +6,12 @@
         
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <ItemsControl Margin="10,0,-10,0">
-            <views:Login/>
-            <views:Register/>
-            <views:Home/>
+        <ItemsControl >
+            <ItemsControl.Items>
+                <!--<views:Login/>
+                <views:Register/>-->
+                <views:Home/>
+            </ItemsControl.Items>
         </ItemsControl>
 
     </Grid>

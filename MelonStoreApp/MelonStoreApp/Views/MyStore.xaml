@@ -5,7 +5,34 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    <UserControl.Resources>
+        <Style TargetType="ToggleButton" x:Key="tagButton">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="10,3,10,3"/>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <WrapPanel >
+            <ToggleButton Content="All" Style="{StaticResource tagButton}"/>
+            <ToggleButton Content="Female" Style="{StaticResource tagButton}"/>
+            <ToggleButton Content="Male" Style="{StaticResource tagButton}"/>
+            <ToggleButton Content="Shirts" Style="{StaticResource tagButton}"/>
+            <ToggleButton Content="Trousers" Style="{StaticResource tagButton}"/>
+            <ToggleButton Content="Dresses" Style="{StaticResource tagButton}"/>
+            <ToggleButton Content="Blouses" Style="{StaticResource tagButton}"/>
+        </WrapPanel>
+
+        <DataGrid x:Name="grid" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name,Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Brand" Binding="{Binding Brand,Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category,Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price,Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount,Mode=TwoWay}"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </StackPanel>
 </UserControl>
