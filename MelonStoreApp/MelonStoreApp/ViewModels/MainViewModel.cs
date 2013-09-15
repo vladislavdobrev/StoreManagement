@@ -19,15 +19,15 @@ namespace MelonStoreApp.ViewModels
             this.VMs = new List<ViewModelBase>();
             this.Vs = new List<UserControl>();
 
-            this.Vs.Add(Views.Login);
-            this.Vs.Add(Views.Register);
-            this.Vs.Add(Views.Home);
+            this.Vs.Add(new Views.Login());
+            this.Vs.Add(new Views.Register());
+            this.Vs.Add(new Views.Home());
 
-            this.currentView = Views.Login;
+            //this.currentView = Views.Login;
         }
 
-        public IEnumerable<ViewModelBase> VMs { get; set; }
-        public IEnumerable<UserControl> Vs { get; set; }
+        public ICollection<ViewModelBase> VMs { get; set; }
+        public ICollection<UserControl> Vs { get; set; }
         public UserControl CurrentView
         {
             get { return this.currentView; }
