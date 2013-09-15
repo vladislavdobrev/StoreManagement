@@ -172,6 +172,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ModelConverter\Searilizator.cs" />
+    <Compile Include="Models\ProductModels\FiltrationModel.cs" />
     <Compile Include="Models\ProductModels\ProductApiModel.cs" />
     <Compile Include="Models\ProductStoreModels\ProductStoreApiFullDescModel.cs" />
     <Compile Include="Models\ProductStoreModels\ProductStoreApiSellBuyModel.cs" />

@@ -22,6 +22,8 @@ namespace MelonStore.Data.Mapping
             this.Property(t => t.SessionKey).HasColumnName("SessionKey");
             this.Property(t => t.Password).HasColumnName("Password");
             this.Property(t => t.Store_Id).HasColumnName("Store_Id");
+
+            this.HasRequired(t => t.Store);
         }
     }
 }

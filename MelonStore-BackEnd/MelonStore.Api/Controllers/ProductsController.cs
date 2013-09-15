@@ -1,4 +1,6 @@
-﻿using MelonStore.Api.Models.ProductStoreModels;
+﻿using MelonStore.Api.EnumConverters;
+using MelonStore.Api.Models.ProductModels;
+using MelonStore.Api.Models.ProductStoreModels;
 using MelonStore.Data;
 using MelonStore.Models;
 using MelonStore.Repositories;
@@ -23,8 +25,12 @@ namespace MelonStore.Api.Controllers
         }
 
         [ActionName("all")]
-        public HttpResponseMessage GetAll()
+        public HttpResponseMessage GetAll(string sessionKey)
         {
+            if (!String.IsNullOrEmpty(sessionKey))
+            {
+                throw new ArgumentException("Not allowed action for non - logged user!");
+            }
             IQueryable<Product> dbProducts = this.repo.All();
             ICollection<ProductApiModel> products =
                 (from currProduct in dbProducts
@@ -37,20 +43,20 @@ namespace MelonStore.Api.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, products);
         }
 
-        [ActionName("get")]
-        public HttpResponseMessage GetFiltered(string gender, string category)
+        [ActionName("postFiltered")]
+        public HttpResponseMessage PostFiltered(FiltrationModel filter,string sessionKey)
         {
-            IQueryable<Product> dbFiltered = this.repo.Get(Gender.Female, Category.Shirts);
+            if (!String.IsNullOrEmpty(sessionKey))
+            {
+                throw new ArgumentException("Not allowed action for non - logged user!");
+            }
 
-            ICollection<ProductApiModel> products =
-                (from currProduct in dbFiltered
-                 select new ProductApiModel()
-                 {
-                     Name = currProduct.Name,
-                     ImagePath = currProduct.Image.Url
-                 }).ToList();
+            List<Gender> gen = Converter.GetGender(filter.Genders);
+            List<Category> cat = Converter.GetCategory(filter.Categories);
 
-            return this.Request.CreateResponse(HttpStatusCode.OK, products);
+            ICollection<Product> dbFiltered = this.repo.Get(gen, cat);
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, dbFiltered);
         }
     }
 }

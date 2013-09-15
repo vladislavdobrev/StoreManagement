@@ -18,6 +18,8 @@ namespace MelonStore.Data.Mapping
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Location).HasColumnName("Location");
             this.Property(t => t.User_Id).HasColumnName("User_Id");
+
+            this.HasOptional(t => t.User);
         }
     }
 }

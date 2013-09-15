@@ -1,5 +1,6 @@
 ﻿using MelonStore.Models;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -29,17 +30,58 @@ namespace MelonStore.Repositories
             return allProducts;
         }
 
+        public IQueryable<ProductStore> Get(int storeId)
+        {
+            IQueryable<ProductStore> all = this.All();
+
+            IQueryable<ProductStore> productStore = (from current in all
+                                                     where current.Store_Id == storeId
+                                                     select current);
+            return productStore;
+        }
+
         public ProductStore Get(int productId, int storeId)
         {
             IQueryable<ProductStore> all = this.All();
 
             ProductStore productStore = (from current in all
-                                      where current.Product_Id == productId &&
-                                      current.Store_Id == storeId
-                                      select current).FirstOrDefault() ;
-
+                                         where current.Product_Id == productId &&
+                                         current.Store_Id == storeId
+                                         select current).FirstOrDefault();
             return productStore;
 
+        }
+
+        public ICollection<Product> Get(List<Gender> genders, List<Category> categories, int storeId)
+        {
+            IQueryable<Product> all = from curr in this.Get(storeId)
+                                      select curr.Product;
+
+            ICollection<Product> filteredByGender = new HashSet<Product>();
+            foreach (var gender in genders)
+            {
+                foreach (var product in all)
+                {
+                    if (product.Gender == gender)
+                    {
+                        filteredByGender.Add(product);
+                    }
+                }
+            }
+
+            ICollection<Product> filteredByCategoryAndGender = new HashSet<Product>();
+            foreach (var category in categories)
+            {
+                foreach (var product in filteredByGender)
+                {
+                    if (product.Category == category)
+                    {
+                        filteredByCategoryAndGender.Add(product);
+                    }
+                }
+            }
+
+            return filteredByCategoryAndGender;
         }
 
         public ProductStore Add(ProductStore item)
