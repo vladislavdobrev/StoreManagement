@@ -162,27 +162,31 @@ namespace MelonStoreApp.ViewModels
 
         public void LoginExecuteHandler(object parameter)
         {
+            var isDataValid = true;
             this.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(this.Username))
             {
                 this.UsernameMessage = EmptyFieldMessage;
+                isDataValid = false;
             }
             else
             {
                 this.UsernameMessage = string.Empty;
+                isDataValid = false;
             }
 
             if (string.IsNullOrEmpty(this.Password))
             {
                 this.PasswordMessage = EmptyFieldMessage;
+                isDataValid = false;
             }
             else
             {
                 this.PasswordMessage = string.Empty;
             }
 
-            if (!string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password))
+            if (isDataValid)
             {
                 var success = Data.DataPersister.LoginUser("pesho", "pesho");
 
@@ -198,31 +202,6 @@ namespace MelonStoreApp.ViewModels
                 }
             }
         }
-
-        //public bool CanLoginExecuteHandler(object parameter)
-        //{
-        //    //if (string.IsNullOrEmpty(this.Username))
-        //    //{
-        //    //    this.InvalidUsernameVisibility = Visibility.Visible;
-        //    //}
-        //    //else
-        //    //{
-        //    //    this.InvalidUsernameVisibility = Visibility.Hidden;
-        //    //}
-        //    //if (string.IsNullOrEmpty(this.Password))
-        //    //{
-        //    //    this.InvalidPasswordVisibility = Visibility.Visible;
-        //    //}
-        //    //else
-        //    //{
-        //    //    this.InvalidPasswordVisibility = Visibility.Hidden;
-        //    //}
-        //    //if (!string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password))
-        //    //{
-        //    return true;
-        //    //}
-        //    //return false;
-        //}
 
         public void RegisterExecuteHandler(object parameter)
         {

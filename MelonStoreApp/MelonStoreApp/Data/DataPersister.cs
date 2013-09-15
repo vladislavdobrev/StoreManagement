@@ -23,5 +23,10 @@ namespace MelonStoreApp.Data
         {
             return new List<string> { "store1", "store2", "store3" };
         }
+
+        internal static object RegisterUser(string store, string username, string password)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

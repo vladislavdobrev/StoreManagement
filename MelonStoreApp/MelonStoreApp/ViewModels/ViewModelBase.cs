@@ -15,5 +15,18 @@ namespace MelonStoreApp.ViewModels
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
+
+        private string myVar;
+
+        public string MyProperty
+        {
+            get { return myVar; }
+            set
+            {
+                myVar = value;
+                OnPropertyChanged("MyProperty");
+            }
+        }
+
     }
 }

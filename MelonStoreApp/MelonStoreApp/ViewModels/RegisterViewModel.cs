@@ -6,22 +6,26 @@ namespace MelonStoreApp.ViewModels
 {
     public class RegisterViewModel : ViewModelBase
     {
+        private const string EmptyFieldMessage = "!";
+        private const string UsernameTakenMessage = "Username is already registered.";
+        private const string PasswordsDoNotMatch = "Passwords do not match.";
+
         private List<string> stores;
+        private string store;
         private string username;
         private string password;
         private string password2;
 
-        private Visibility invalidStoreVisibility;
-        private Visibility invalidUsernameVisibility;
-        private Visibility invalidPasswordVisibility;
-        private Visibility invalidPassword2Visibility;
-
-        private Commands.RelayCommand registerCommand;
+        private string errorMessage;
+        private string storeMessage;
+        private string usernameMessage;
+        private string passwordMessage;
+        private string password2Message;
 
         public RegisterViewModel()
         {
             this.Stores = Data.DataPersister.GetStores();
-            this.RegisterCommand = new Commands.RelayCommand(this.RegisterExecuteHandler, this.CanRegisterExecuteHandler);
+            this.RegisterCommand = new Commands.RelayCommand(this.RegisterExecuteHandler);
         }
 
         public List<string> Stores
@@ -35,7 +39,23 @@ namespace MelonStoreApp.ViewModels
                 stores = value;
             }
         }
-        
+
+        public string Store
+        {
+            get
+            {
+                return store;
+            }
+            set
+            {
+                if (store != value)
+                {
+                    store = value;
+                    OnPropertyChanged("Store");
+                }
+            }
+        }
+
         public string Username
         {
             get
@@ -84,94 +104,120 @@ namespace MelonStoreApp.ViewModels
             }
         }
 
-        public Visibility InvalidStoreVisibility
+        public string StoreMessage
         {
             get
             {
-                return this.invalidStoreVisibility;
+                return this.storeMessage;
             }
             set
             {
-                if (this.invalidStoreVisibility != value)
+                if (this.storeMessage != value)
                 {
-                    this.invalidStoreVisibility = value;
-                    OnPropertyChanged("InvalidStoreVisibility");
+                    this.storeMessage = value;
+                    OnPropertyChanged("StoreMessage");
                 }
             }
         }
 
-        public Visibility InvalidUsernameVisibility
+        public string UsernameMessage
         {
             get
             {
-                return this.invalidUsernameVisibility;
+                return this.usernameMessage;
             }
             set
             {
-                if (this.invalidUsernameVisibility != value)
+                if (this.usernameMessage != value)
                 {
-                    this.invalidUsernameVisibility = value;
-                    OnPropertyChanged("InvalidUsernameVisibility");
-                }
-            }
-        }
-        
-        public Visibility InvalidPasswordVisibility
-        {
-            get
-            {
-                return this.invalidPasswordVisibility;
-            }
-            set
-            {
-                if (this.invalidPasswordVisibility != value)
-                {
-                    this.invalidPasswordVisibility = value;
-                    OnPropertyChanged("InvalidPasswordVisibility");
+                    this.usernameMessage = value;
+                    OnPropertyChanged("UsernameMessage");
                 }
             }
         }
 
-        public Visibility InvalidPassword2Visibility
+        public string PasswordMessage
         {
             get
             {
-                return this.invalidPassword2Visibility;
+                return this.passwordMessage;
             }
             set
             {
-                if (this.invalidPassword2Visibility != value)
+                if (this.passwordMessage != value)
                 {
-                    this.invalidPassword2Visibility = value;
-                    OnPropertyChanged("InvalidPassword2Visibility");
+                    this.passwordMessage = value;
+                    OnPropertyChanged("PasswordMessage");
                 }
             }
         }
 
-        public Commands.RelayCommand RegisterCommand
+        public string Password2Message
         {
             get
             {
-                return this.registerCommand;
+                return this.password2Message;
             }
             set
             {
-                if (this.registerCommand != value)
+                if (this.password2Message != value)
                 {
-                    this.registerCommand = value;
-                    OnPropertyChanged("RegisterCommand");
+                    this.password2Message = value;
+                    OnPropertyChanged("Password2Message");
                 }
             }
         }
+
+        public Commands.RelayCommand RegisterCommand { get; set; }
 
         private void RegisterExecuteHandler(object parameter)
         {
-            throw new NotImplementedException();
-        }
+            var isDataValid = true;
+            if (this.Store == null)
+            {
+                this.StoreMessage = EmptyFieldMessage;
+                isDataValid = false;
+            }
+            else
+            {
+                this.StoreMessage = string.Empty;
+            }
 
-        private bool CanRegisterExecuteHandler(object parameter)
-        {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(this.Username))
+            {
+                this.UsernameMessage = EmptyFieldMessage;
+                isDataValid = false;
+            }
+            else
+            {
+                this.UsernameMessage = string.Empty;
+            }
+
+            if (string.IsNullOrEmpty(this.Password))
+            {
+                this.PasswordMessage = EmptyFieldMessage;
+                isDataValid = false;
+            }
+            else
+            {
+                this.PasswordMessage = string.Empty;
+            }
+
+            if (string.IsNullOrEmpty(this.Password2))
+            {
+                this.Password2Message = EmptyFieldMessage;
+                isDataValid = false;
+            }
+            else
+            {
+                this.Password2Message = string.Empty;
+            }
+
+            if (isDataValid)
+            {
+                var success = Data.DataPersister.RegisterUser("shop","pesho", "peshopwd");
+                //TODO
+            }
         }
     }
 }
