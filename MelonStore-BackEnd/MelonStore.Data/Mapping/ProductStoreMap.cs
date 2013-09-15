@@ -24,6 +24,7 @@ namespace MelonStore.Data.Mapping
             this.Property(t => t.Store_Id).HasColumnName("Store_Id");
             this.Property(t => t.Price).HasColumnName("Price");
             this.Property(t => t.Count).HasColumnName("Count");
+            this.Property(t => t.LastDateSold).HasColumnName("LastDateSold");
 
             // Relationships
             this.HasRequired(t => t.Product)

@@ -11,5 +11,6 @@ namespace MelonStore.Models
         public int Count { get; set; }
         public virtual Product Product { get; set; }
         public virtual Store Store { get; set; }
+        public DateTime? LastDateSold { get; set; }
     }
 }

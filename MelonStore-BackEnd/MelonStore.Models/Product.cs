@@ -16,6 +16,7 @@ namespace MelonStore.Models
         public Nullable<int> Image_Id { get; set; }
         public virtual Image Image { get; set; }
         public virtual ICollection<ProductStore> ProductStores { get; set; }
+        public DateTime DateAdded { get; set; }
 
     }
 }

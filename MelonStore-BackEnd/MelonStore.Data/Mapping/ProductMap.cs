@@ -20,6 +20,7 @@ namespace MelonStore.Data.Mapping
             this.Property(t => t.Price).HasColumnName("Price");
             this.Property(t => t.BasePrice).HasColumnName("BasePrice");
             this.Property(t => t.Image_Id).HasColumnName("Image_Id");
+            this.Property(t => t.DateAdded).HasColumnName("DateAdded");
 
             // Relationships
             this.HasOptional(t => t.Image)
