@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:views="clr-namespace:MelonStoreApp.Views"
              xmlns:viewModels="clr-namespace:MelonStoreApp.ViewModels"
+             xmlns:helpers="clr-namespace:MelonStoreApp.Helpers"
              mc:Ignorable="d" >
 
-    <!--<UserControl.DataContext>
+    <UserControl.DataContext>
         <viewModels:LoginViewModel/>
-    </UserControl.DataContext>-->
+    </UserControl.DataContext>
 
     <UserControl.Resources>
         <Style TargetType="TextBlock" x:Key="textBlockStyle">
@@ -30,15 +31,21 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource textBlockStyle}" Text="Username"/>
             <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource textBlockStyle}" Text="Password"/>
-            <TextBox Grid.Row="0" Grid.Column="1"     HorizontalAlignment="Left" Width="100" Margin="10"/>
-            <PasswordBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="100" Margin="10"/>
+            <TextBox Grid.Row="0" Grid.Column="1"     HorizontalAlignment="Left" Width="100" Margin="10" Text="{Binding Username, Mode=TwoWay}"/>
+            <PasswordBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="100" Margin="10"
+                         helpers:PasswordHelper.Attach="True" 
+                         helpers:PasswordHelper.Password="{Binding Password, Mode=TwoWay}"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Margin="0,10" Text="!" FontWeight="Bold"  Foreground="Red" Visibility="{Binding UsernameEnteredVisibility}"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Margin="0,10" Text="!" FontWeight="Bold"  Foreground="Red" Visibility="{Binding PasswordEnteredVisibility}"/>
         </Grid>
-        <TextBlock Text="Invalid username or password." Foreground="Red" TextAlignment="Center" Visibility="{Binding IsUserValid}"/>
-        <Button Width="100" Margin="0,20,0,10" Command="{Binding LoginCommand}" Content="Login"/>
+        
+        <TextBlock Text="Invalid username or password." Foreground="Red" TextAlignment="Center" Visibility="{Binding ErrorMessageVisibility}"/>
+        <Button Width="100" x:Name="asd" Margin="0,20,0,10" Command="{Binding LoginCommand}" Content="Login"/>
         <Button Width="100" Margin="0,0,0,20" Command="{Binding RegisterCommand}" Content="Register"/>
     </StackPanel>
 </UserControl>
