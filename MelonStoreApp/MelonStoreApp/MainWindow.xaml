@@ -1,19 +1,19 @@
 ﻿<Window x:Class="MelonStoreApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:views="clr-namespace:MelonStoreApp.Views"
+        xmlns:viewModels="clr-namespace:MelonStoreApp.ViewModels"
+        Title="MainWindow" Height="350" Width="525"
+        DataContext="{x:Type viewModels:MainViewModel}"
+        >
     <Grid>
-<<<<<<< HEAD
         <ItemsControl >
             <ItemsControl.Items>
-                <!--<views:Login/>
-                <views:Register/>-->
-                <views:Home/>
+                <views:Login Visibility="{Binding}"/>
+                <views:Register Visibility="{Binding}"/>
+                <views:Home Visibility="{Binding}"/>
             </ItemsControl.Items>
         </ItemsControl>
 
-=======
-        
->>>>>>> 146595f408dc0febc521f19e0c1f8ca51a85ce81
     </Grid>
 </Window>
