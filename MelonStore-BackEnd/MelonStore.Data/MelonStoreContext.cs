@@ -23,6 +23,8 @@ namespace MelonStore.Data
             modelBuilder.Configurations.Add(new ProductStoreMap());
             modelBuilder.Configurations.Add(new StoreMap());
             modelBuilder.Configurations.Add(new UserMap());
+
+            modelBuilder.Entity<User>().HasOptional(x => x.Store).WithRequired(x => x.User);
         }
     }
 }
