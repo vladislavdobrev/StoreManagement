@@ -29,7 +29,6 @@ C:\Users\academy\Desktop\MelonStore\StoreManagement\MelonStore-BackEnd\MelonStor
 C:\Users\academy\Desktop\MelonStore\StoreManagement\MelonStore-BackEnd\MelonStore.Api\bin\MelonStore.Data.pdb
 C:\Users\academy\Desktop\MelonStore\StoreManagement\MelonStore-BackEnd\MelonStore.Api\bin\MelonStore.Models.pdb
 C:\Users\academy\Desktop\MelonStore\StoreManagement\MelonStore-BackEnd\MelonStore.Api\bin\MelonStore.Repositories.pdb
-C:\Users\academy\Desktop\MelonStore\StoreManagement\MelonStore-BackEnd\MelonStore.Api\bin\EntityFramework.xml
 C:\Users\academy\Desktop\MelonStore\StoreManagement\MelonStore-BackEnd\MelonStore.Api\bin\Newtonsoft.Json.xml
 C:\Users\academy\Desktop\MelonStore\StoreManagement\MelonStore-BackEnd\MelonStore.Api\bin\System.Net.Http.Formatting.xml
 C:\Users\academy\Desktop\MelonStore\StoreManagement\MelonStore-BackEnd\MelonStore.Api\bin\System.Web.Helpers.xml
