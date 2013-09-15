@@ -1,11 +1,9 @@
 ﻿<Window x:Class="MelonStoreApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:MelonStoreApp"
-        xmlns:views="clr-namespace:MelonStoreApp.Views"
-        
         Title="MainWindow" Height="350" Width="525">
     <Grid>
+<<<<<<< HEAD
         <ItemsControl >
             <ItemsControl.Items>
                 <!--<views:Login/>
@@ -14,5 +12,8 @@
             </ItemsControl.Items>
         </ItemsControl>
 
+=======
+        
+>>>>>>> 146595f408dc0febc521f19e0c1f8ca51a85ce81
     </Grid>
 </Window>

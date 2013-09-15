@@ -14,6 +14,7 @@ namespace MelonStore.Models
         public string SessionKey { get; set; }
         [MaxLength(40), MinLength(40)]
         public string Password { get; set; }
+        public Nullable<int> Store_Id { get; set; }
         public virtual Store Store { get; set; }
     }
 }

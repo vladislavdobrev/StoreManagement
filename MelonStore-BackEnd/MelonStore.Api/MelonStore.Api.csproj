@@ -44,6 +44,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -293,6 +294,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MelonStore.Data\MelonStore.Data.csproj">
+      <Project>{2bdf74ca-3da0-43ac-b6e0-d990b39d77bd}</Project>
+      <Name>MelonStore.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MelonStore.Models\MelonStore.Models.csproj">
+      <Project>{ddeda995-34c7-4bc9-9b1c-66d7f451939c}</Project>
+      <Name>MelonStore.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MelonStore.Repositories\MelonStore.Repositories.csproj">
+      <Project>{66bcd22a-370b-48f4-ad48-05bb1e4b1265}</Project>
+      <Name>MelonStore.Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
