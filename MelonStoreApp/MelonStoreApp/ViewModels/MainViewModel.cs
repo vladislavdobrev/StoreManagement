@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace MelonStoreApp.ViewModels
 {
@@ -16,21 +9,44 @@ namespace MelonStoreApp.ViewModels
 
         public MainViewModel()
         {
-            this.VMs = new List<ViewModelBase>();
-            this.Vs = new List<UserControl>();
+            this.LoginVM = new ViewModels.LoginViewModel();
+            this.RegisterVM = new ViewModels.RegisterViewModel();
+            //this.HomeVM = new ViewModels.
 
-            this.Vs.Add(new Views.Login());
-            this.Vs.Add(new Views.Register());
-            this.Vs.Add(new Views.Home());
+            this.Login = new Views.Login { DataContext = this.LoginVM };
+            this.Register = new Views.Register { DataContext = this.RegisterVM };
+            this.Home = new Views.Home();
 
-            //this.currentView = Views.Login;
+            this.LoginVM.PropertyChanged += LoginVM_PropertyChanged;
+
+
+            this.CurrentView = Login;
         }
 
-        public ICollection<ViewModelBase> VMs { get; set; }
-        public ICollection<UserControl> Vs { get; set; }
+        void LoginVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "IsUserLogged": this.CurrentView = this.Home; return;
+                case "IsRegistering": this.CurrentView = this.Register; return;
+            }
+
+        }
+
+        public UserControl Login { get; set; }
+        public UserControl Register { get; set; }
+        public UserControl Home { get; set; }
+
+        public ViewModelBase LoginVM { get; set; }
+        public ViewModelBase RegisterVM { get; set; }
+        public ViewModelBase HomeVM { get; set; }
+
         public UserControl CurrentView
         {
-            get { return this.currentView; }
+            get
+            {
+                return this.currentView;
+            }
             set
             {
                 if (this.currentView != value)

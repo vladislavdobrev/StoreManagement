@@ -1,5 +1,6 @@
 ﻿using MelonStore.Data.Mapping;
 using MelonStore.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 
 namespace MelonStore.Data
@@ -23,6 +24,8 @@ namespace MelonStore.Data
             modelBuilder.Configurations.Add(new ProductStoreMap());
             modelBuilder.Configurations.Add(new StoreMap());
             modelBuilder.Configurations.Add(new UserMap());
+            modelBuilder.Entity<User>().Property(t => t.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }
 }

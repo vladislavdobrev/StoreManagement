@@ -3,17 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:views="clr-namespace:MelonStoreApp.Views"
         xmlns:viewModels="clr-namespace:MelonStoreApp.ViewModels"
-        Title="MainWindow" Height="350" Width="525"
-        DataContext="{x:Type viewModels:MainViewModel}"
+        Title="MainWindow" Height="350" Width="525" 
         >
-    <Grid>
-        <ItemsControl >
-            <ItemsControl.Items>
-                <!--<views:Login Visibility="{Binding LoginVisibility}"/>
-                <views:Register Visibility="{Binding RegisterVisibility}"/>-->
-                <views:Home Visibility="{Binding Warehouse}"/>
-            </ItemsControl.Items>
-        </ItemsControl>
 
+    <Window.DataContext>
+        <viewModels:MainViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <ContentControl Content="{Binding CurrentView}"/>
     </Grid>
 </Window>

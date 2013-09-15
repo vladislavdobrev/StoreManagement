@@ -3,24 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:helpers="clr-namespace:MelonStoreApp.Helpers"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+            >
     <UserControl.Resources>
         <Style TargetType="TextBlock" x:Key="textBlockStyle">
             <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="10"/>
         </Style>
 
         <Style TargetType="TextBox" x:Key="textBoxStyle">
             <Setter Property="Margin" Value="10"/>
-            <Setter Property="Width" Value="100"/>
         </Style>
+
+        <Style TargetType="PasswordBox" x:Key="passBoxStyle">
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="errorBlock">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="Text" Value="!"/>
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,10"/>
+        </Style>
+
     </UserControl.Resources>
     <StackPanel>
         <Border Background="PaleGreen" Width="100" Height="100" Margin="20">
             <Image/>
         </Border>
-        <Grid Margin="10">
+        <Grid Width="300">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -29,23 +45,32 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="15*"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Store" Grid.Row="0" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
-            <ComboBox Grid.Row="0" Grid.Column="1" Margin="10"/>
+            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Stores}" Margin="10"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource errorBlock}" Visibility="{Binding InvalidStoreVisibility}"/>
 
             <TextBlock Text="Username" Grid.Row="1" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource textBoxStyle}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource textBoxStyle}" Text="{Binding Username, Mode=TwoWay}"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource errorBlock}" Visibility="{Binding InvalidUsernameVisibility}"/>
 
             <TextBlock Text="Password" Grid.Row="2" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource textBoxStyle}"/>
+            <PasswordBox Grid.Row="2" Grid.Column="1" Style="{StaticResource passBoxStyle}" 
+                     helpers:PasswordHelper.Attach="True"
+                     helpers:PasswordHelper.Password="{Binding Password, Mode=TwoWay}"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Style="{StaticResource errorBlock}" Visibility="{Binding InvalidPasswordVisibility}"/>
 
             <TextBlock Text="Repeat Password" Grid.Row="3" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource textBoxStyle}"/>
-
+            <PasswordBox Grid.Row="3" Grid.Column="1" Style="{StaticResource passBoxStyle}" 
+                     helpers:PasswordHelper.Attach="True"
+                     helpers:PasswordHelper.Password="{Binding Password2, Mode=TwoWay}"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" Style="{StaticResource errorBlock}" Visibility="{Binding InvalidPassword2Visibility}"/>
         </Grid>
+        <TextBlock TextAlignment="Center" Foreground="Red" Text="{Binding ErrorMessage}"/>
         <Button Content="Register" Width="100" Margin="20"/>
     </StackPanel>
 </UserControl>

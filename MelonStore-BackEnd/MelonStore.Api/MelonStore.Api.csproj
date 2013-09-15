@@ -163,17 +163,23 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\StoreProductsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="EnumConverters\Converter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ModelConverter\Searilizator.cs" />
-    <Compile Include="Models\UserLoggedModel.cs" />
-    <Compile Include="Models\UserLoginModel.cs" />
-    <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Models\UserRegisterModel.cs" />
+    <Compile Include="Models\ProductModels\ProductApiModel.cs" />
+    <Compile Include="Models\ProductStoreModels\ProductStoreApiFullDescModel.cs" />
+    <Compile Include="Models\ProductStoreModels\ProductStoreApiSellBuyModel.cs" />
+    <Compile Include="Models\StoreModels\StoreApiModel.cs" />
+    <Compile Include="Models\UserModels\UserLoggedModel.cs" />
+    <Compile Include="Models\UserModels\UserLoginModel.cs" />
+    <Compile Include="Models\UserModels\UserModel.cs" />
+    <Compile Include="Models\UserModels\UserRegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
