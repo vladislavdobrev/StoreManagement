@@ -14,9 +14,7 @@
             <Setter Property="Padding" Value="10,3,10,3"/>
         </Style>
     </UserControl.Resources>
-    <UserControl.DataContext>
-        <viewModels:MyStoreViewModel/>
-    </UserControl.DataContext>
+
     <StackPanel>
         <WrapPanel>
             <ToggleButton Content="All" Style="{StaticResource tagButton}"/>
