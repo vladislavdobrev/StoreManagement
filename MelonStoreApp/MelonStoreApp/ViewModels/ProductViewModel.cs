@@ -24,9 +24,9 @@ namespace MelonStoreApp.ViewModels
 
 
 
-        public ProductViewModel(Product prod)
+        public ProductViewModel()
         {
-            this.Product = prod;
+            //this.Product = prod;
         }
     }
 }
