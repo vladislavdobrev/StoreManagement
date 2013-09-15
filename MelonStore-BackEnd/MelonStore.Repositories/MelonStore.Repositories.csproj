@@ -44,11 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbImagesRepository.cs" />
-    <Compile Include="DbProductRepository.cs" />
-    <Compile Include="DbUsersRepository.cs" />
+    <Compile Include="Image\DbImagesRepository.cs" />
+    <Compile Include="ProductStore\DbProductRepository.cs" />
+    <Compile Include="User\DbUsersRepository.cs" />
+    <Compile Include="ProductStore\IProductStoreRepository.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="IUserRepository.cs" />
+    <Compile Include="User\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
