@@ -10,6 +10,9 @@ namespace MelonStoreApp.Views
         public Warehouse()
         {
             InitializeComponent();
+            this.warehousePannel.ItemsSource = new List<Models.Product>(){
+                new Models.Product {Id = 1, Name = "asd", Brand = "Nike", Category = "asd", Price=123, Amount = 10}          
+            };
         }
     }
 }
