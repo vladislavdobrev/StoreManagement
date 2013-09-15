@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MelonStoreApp.ViewModels
@@ -10,51 +6,107 @@ namespace MelonStoreApp.ViewModels
     public class LoginViewModel : ViewModelBase
     {
         private Visibility errorMessageVisibility;
-        private Visibility usernameEnteredVisibility;
-        private Visibility passwordEnteredVisibility;
+        private Visibility invalidUsernameVisibility;
+        private Visibility invalidPasswordVisibility;
+        private string username;
+        private string password;
+        private bool isUserLogged;
+        private bool isRegistering;
+
+        private Commands.RelayCommand loginCommand;
 
         public LoginViewModel()
         {
             this.LoginCommand = new Commands.RelayCommand(LoginExecuteHandler, CanLoginExecuteHandler);
             this.RegisterCommand = new Commands.RelayCommand(RegisterExecuteHandler);
-            this.errorMessageVisibility = Visibility.Hidden;
-            this.usernameEnteredVisibility = Visibility.Hidden;
-            this.passwordEnteredVisibility = Visibility.Hidden;
+            this.ErrorMessageVisibility = Visibility.Hidden;
+            this.InvalidUsernameVisibility = Visibility.Hidden;
+            this.InvalidPasswordVisibility = Visibility.Hidden;
+            this.IsUserLogged = false;
+            this.IsRegistering = false;
         }
 
-        private string username;
+        public bool IsRegistering
+        {
+            get
+            {
+                return this.isRegistering;
+            }
+            set
+            {
+                if (this.isRegistering != value)
+                {
+                    this.isRegistering = value;
+                    OnPropertyChanged("IsRegistering");
+                }
+            }
+        }
 
         public string Username
         {
-            get { return username; }
+            get
+            {
+                return username;
+            }
             set
             {
                 if (this.username != value)
                 {
                     username = value;
                     OnPropertyChanged("Username");
-                   
+                   // OnPropertyChanged("LoginCommand");
                 }
             }
         }
 
-        private string password;
-
         public string Password
         {
-            get { return password; }
+            get
+            {
+                return password;
+            }
             set
             {
                 if (this.password != value)
                 {
                     password = value;
-                    OnPropertyChanged("Password");
-  
+                  //  OnPropertyChanged("Password");
+
                 }
             }
         }
 
-        public Commands.RelayCommand LoginCommand { get; set; }
+        public bool IsUserLogged
+        {
+            get
+            {
+                return this.isUserLogged;
+            }
+            set
+            {
+                if (this.isUserLogged != value)
+                {
+                    this.isUserLogged = value;
+                    OnPropertyChanged("IsUserLogged");
+                }
+            }
+        }
+
+        public Commands.RelayCommand LoginCommand
+        {
+            get
+            {
+                return this.loginCommand;
+            }
+            set
+            {
+                if (loginCommand != value)
+                {
+                    this.loginCommand = value;
+                    OnPropertyChanged("LoginCommand");
+                }
+            }
+        }
 
         public Commands.RelayCommand RegisterCommand { get; set; }
 
@@ -73,113 +125,107 @@ namespace MelonStoreApp.ViewModels
                 }
             }
         }
-        public Visibility UsernameEnteredVisibility
+
+        public Visibility InvalidUsernameVisibility
         {
             get
             {
-                return this.usernameEnteredVisibility;
+                return this.invalidUsernameVisibility;
             }
             set
             {
-                if (this.usernameEnteredVisibility != value)
+                if (this.invalidUsernameVisibility != value)
                 {
-                    this.usernameEnteredVisibility = value;
-                    OnPropertyChanged("UsernameEnteredVisibility");
-                }
-            }
-        }
-        public Visibility PasswordEnteredVisibility
-        {
-            get
-            {
-                return this.passwordEnteredVisibility;
-            }
-            set
-            {
-                if (this.passwordEnteredVisibility != value)
-                {
-                    this.passwordEnteredVisibility = value;
-                    OnPropertyChanged("PasswordEnteredVisibility");
+                    this.invalidUsernameVisibility = value;
+                    OnPropertyChanged("InvalidUsernameVisibility");
                 }
             }
         }
 
-        public void LoginExecuteHandler(object param)
+        public Visibility InvalidPasswordVisibility
+        {
+            get
+            {
+                return this.invalidPasswordVisibility;
+            }
+            set
+            {
+                if (this.invalidPasswordVisibility != value)
+                {
+                    this.invalidPasswordVisibility = value;
+                    OnPropertyChanged("InvalidPasswordVisibility");
+                }
+            }
+        }
+
+        public void LoginExecuteHandler(object parameter)
         {
             if (string.IsNullOrEmpty(this.Username))
             {
-                this.UsernameEnteredVisibility = Visibility.Visible;
+                this.InvalidUsernameVisibility = Visibility.Visible;
             }
             else
             {
-                this.UsernameEnteredVisibility = Visibility.Hidden;
+                this.InvalidUsernameVisibility = Visibility.Hidden;
             }
 
             if (string.IsNullOrEmpty(this.Password))
             {
-                this.PasswordEnteredVisibility = Visibility.Visible;
+                this.InvalidPasswordVisibility = Visibility.Visible;
             }
             else
             {
-                this.PasswordEnteredVisibility = Visibility.Hidden;
+                this.InvalidPasswordVisibility = Visibility.Hidden;
             }
 
-            //if (string.IsNullOrEmpty(this.Username) || string.IsNullOrEmpty(this.Password))
-            //{
-            //    return false;
-            //}
-
-            var success = Data.DataPersister.LoginUser("pesho", "pesho");
-            if (success == null)
+            if (!string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password))
             {
-                this.UsernameEnteredVisibility = Visibility.Hidden;
-                this.PasswordEnteredVisibility = Visibility.Hidden;
-                this.ErrorMessageVisibility = Visibility.Visible;
+                var success = Data.DataPersister.LoginUser("pesho", "pesho");
+
+                if (success == null)
+                {
+                    this.InvalidUsernameVisibility = Visibility.Hidden;
+                    this.InvalidPasswordVisibility = Visibility.Hidden;
+                    this.ErrorMessageVisibility = Visibility.Visible;
+                }
+                else
+                {
+                    this.IsUserLogged = true;
+                }
             }
-
-        //    return true;
         }
 
-        public void RegisterExecuteHandler(object param)
+        public bool CanLoginExecuteHandler(object parameter)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool CanLoginExecuteHandler(object param)
-        {
-            return true;
             //if (string.IsNullOrEmpty(this.Username))
             //{
-            //    this.UsernameEnteredVisibility = Visibility.Visible;
+            //    this.InvalidUsernameVisibility = Visibility.Visible;
             //}
             //else
             //{
-            //    this.UsernameEnteredVisibility = Visibility.Hidden;
+            //    this.InvalidUsernameVisibility = Visibility.Hidden;
             //}
 
             //if (string.IsNullOrEmpty(this.Password))
             //{
-            //    this.PasswordEnteredVisibility = Visibility.Visible;
+            //    this.InvalidPasswordVisibility = Visibility.Visible;
             //}
             //else
             //{
-            //    this.PasswordEnteredVisibility = Visibility.Hidden;
+            //    this.InvalidPasswordVisibility = Visibility.Hidden;
             //}
 
-            //if (string.IsNullOrEmpty(this.Username) || string.IsNullOrEmpty(this.Password))
+            //if (!string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password))
             //{
-            //    return false;
+                return true;
             //}
 
-            //var success = Data.DataPersister.LoginUser("pesho", "pesho");
-            //if (success == null)
-            //{
-            //    this.UsernameEnteredVisibility = Visibility.Hidden;
-            //    this.PasswordEnteredVisibility = Visibility.Hidden;
-            //    this.ErrorMessageVisibility = Visibility.Visible;
-            //}
+            //return false;
+        }
 
-            //return true;
+        public void RegisterExecuteHandler(object parameter)
+        {
+            this.IsRegistering = true;
         }
     }
 }

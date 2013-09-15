@@ -8,16 +8,11 @@
              xmlns:helpers="clr-namespace:MelonStoreApp.Helpers"
              mc:Ignorable="d" >
 
-    <UserControl.DataContext>
-        <viewModels:LoginViewModel/>
-    </UserControl.DataContext>
-
     <UserControl.Resources>
         <Style TargetType="TextBlock" x:Key="textBlockStyle">
             <Setter Property="TextAlignment" Value="Right"/>
             <Setter Property="Margin" Value="10"/>
         </Style>
-
 
     </UserControl.Resources>
 
@@ -40,10 +35,10 @@
             <PasswordBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="100" Margin="10"
                          helpers:PasswordHelper.Attach="True" 
                          helpers:PasswordHelper.Password="{Binding Password, Mode=TwoWay}"/>
-            <TextBlock Grid.Row="0" Grid.Column="2" Margin="0,10" Text="!" FontWeight="Bold"  Foreground="Red" Visibility="{Binding UsernameEnteredVisibility}"/>
-            <TextBlock Grid.Row="1" Grid.Column="2" Margin="0,10" Text="!" FontWeight="Bold"  Foreground="Red" Visibility="{Binding PasswordEnteredVisibility}"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Margin="0,10" Text="!" FontWeight="Bold"  Foreground="Red" Visibility="{Binding InvalidUsernameVisibility}"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Margin="0,10" Text="!" FontWeight="Bold"  Foreground="Red" Visibility="{Binding InvalidPasswordVisibility}"/>
         </Grid>
-        
+
         <TextBlock Text="Invalid username or password." Foreground="Red" TextAlignment="Center" Visibility="{Binding ErrorMessageVisibility}"/>
         <Button Width="100" x:Name="asd" Margin="0,20,0,10" Command="{Binding LoginCommand}" Content="Login"/>
         <Button Width="100" Margin="0,0,0,20" Command="{Binding RegisterCommand}" Content="Register"/>

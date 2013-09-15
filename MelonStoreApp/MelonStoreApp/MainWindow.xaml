@@ -9,7 +9,7 @@
     <Window.DataContext>
         <viewModels:MainViewModel/>
     </Window.DataContext>
-    
+
     <Grid>
         <ContentControl Content="{Binding CurrentView}"/>
     </Grid>

@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MelonStoreApp.Commands
 {
     public delegate void ExecuteDelegate(object obj);
+
     public delegate bool CanExecuteDelegate(object obj);
 
     public class RelayCommand : ICommand
