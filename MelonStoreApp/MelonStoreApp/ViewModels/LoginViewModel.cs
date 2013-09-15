@@ -5,9 +5,12 @@ namespace MelonStoreApp.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private Visibility errorMessageVisibility;
-        private Visibility invalidUsernameVisibility;
-        private Visibility invalidPasswordVisibility;
+        private const string EmptyFieldMessage = "!";
+        private const string InvalidDataMessage = "Invalid username or password.";
+
+        private string errorMessage;
+        private string usernameMessage;
+        private string passwordMessage;
         private string username;
         private string password;
         private bool isUserLogged;
@@ -17,11 +20,11 @@ namespace MelonStoreApp.ViewModels
 
         public LoginViewModel()
         {
-            this.LoginCommand = new Commands.RelayCommand(LoginExecuteHandler, CanLoginExecuteHandler);
+            this.LoginCommand = new Commands.RelayCommand(LoginExecuteHandler);
             this.RegisterCommand = new Commands.RelayCommand(RegisterExecuteHandler);
-            this.ErrorMessageVisibility = Visibility.Hidden;
-            this.InvalidUsernameVisibility = Visibility.Hidden;
-            this.InvalidPasswordVisibility = Visibility.Hidden;
+            this.ErrorMessage = string.Empty;
+            this.UsernameMessage = string.Empty;
+            this.PasswordMessage = string.Empty;
             this.IsUserLogged = false;
             this.IsRegistering = false;
         }
@@ -54,7 +57,7 @@ namespace MelonStoreApp.ViewModels
                 {
                     username = value;
                     OnPropertyChanged("Username");
-                   // OnPropertyChanged("LoginCommand");
+                    // OnPropertyChanged("LoginCommand");
                 }
             }
         }
@@ -70,8 +73,7 @@ namespace MelonStoreApp.ViewModels
                 if (this.password != value)
                 {
                     password = value;
-                  //  OnPropertyChanged("Password");
-
+                    //  OnPropertyChanged("Password");
                 }
             }
         }
@@ -110,72 +112,74 @@ namespace MelonStoreApp.ViewModels
 
         public Commands.RelayCommand RegisterCommand { get; set; }
 
-        public Visibility ErrorMessageVisibility
+        public string ErrorMessage
         {
             get
             {
-                return this.errorMessageVisibility;
+                return this.errorMessage;
             }
             set
             {
-                if (this.errorMessageVisibility != value)
+                if (this.errorMessage != value)
                 {
-                    this.errorMessageVisibility = value;
-                    OnPropertyChanged("ErrorMessageVisibility");
+                    this.errorMessage = value;
+                    OnPropertyChanged("ErrorMessage");
                 }
             }
         }
 
-        public Visibility InvalidUsernameVisibility
+        public string UsernameMessage
         {
             get
             {
-                return this.invalidUsernameVisibility;
+                return this.usernameMessage;
             }
             set
             {
-                if (this.invalidUsernameVisibility != value)
+                if (this.usernameMessage != value)
                 {
-                    this.invalidUsernameVisibility = value;
-                    OnPropertyChanged("InvalidUsernameVisibility");
+                    this.usernameMessage = value;
+                    OnPropertyChanged("UsernameMessage");
                 }
             }
         }
 
-        public Visibility InvalidPasswordVisibility
+        public string PasswordMessage
         {
             get
             {
-                return this.invalidPasswordVisibility;
+                return this.passwordMessage;
             }
             set
             {
-                if (this.invalidPasswordVisibility != value)
+                if (this.passwordMessage != value)
                 {
-                    this.invalidPasswordVisibility = value;
-                    OnPropertyChanged("InvalidPasswordVisibility");
+                    this.passwordMessage = value;
+                    OnPropertyChanged("PasswordMessage");
                 }
             }
         }
 
         public void LoginExecuteHandler(object parameter)
         {
+            this.ErrorMessage = string.Empty;
+
             if (string.IsNullOrEmpty(this.Username))
             {
-                this.InvalidUsernameVisibility = Visibility.Visible;
+                this.UsernameMessage = EmptyFieldMessage;
             }
             else
             {
-                this.InvalidUsernameVisibility = Visibility.Hidden;
+                this.UsernameMessage = string.Empty;
             }
 
             if (string.IsNullOrEmpty(this.Password))
             {
-                this.InvalidPasswordVisibility = Visibility.Visible;
+                this.PasswordMessage = EmptyFieldMessage;
             }
             else
             {
-                this.InvalidPasswordVisibility = Visibility.Hidden;
+                this.PasswordMessage = string.Empty;
             }
 
             if (!string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password))
@@ -184,9 +188,9 @@ namespace MelonStoreApp.ViewModels
 
                 if (success == null)
                 {
-                    this.InvalidUsernameVisibility = Visibility.Hidden;
-                    this.InvalidPasswordVisibility = Visibility.Hidden;
-                    this.ErrorMessageVisibility = Visibility.Visible;
+                    this.UsernameMessage = string.Empty;
+                    this.PasswordMessage = string.Empty;
+                    this.ErrorMessage = InvalidDataMessage;
                 }
                 else
                 {
@@ -195,33 +199,30 @@ namespace MelonStoreApp.ViewModels
             }
         }
 
-        public bool CanLoginExecuteHandler(object parameter)
-        {
-            //if (string.IsNullOrEmpty(this.Username))
-            //{
-            //    this.InvalidUsernameVisibility = Visibility.Visible;
-            //}
-            //else
-            //{
-            //    this.InvalidUsernameVisibility = Visibility.Hidden;
-            //}
-
-            //if (string.IsNullOrEmpty(this.Password))
-            //{
-            //    this.InvalidPasswordVisibility = Visibility.Visible;
-            //}
-            //else
-            //{
-            //    this.InvalidPasswordVisibility = Visibility.Hidden;
-            //}
-
-            //if (!string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password))
-            //{
-                return true;
-            //}
-
-            //return false;
-        }
+        //public bool CanLoginExecuteHandler(object parameter)
+        //{
+        //    //if (string.IsNullOrEmpty(this.Username))
+        //    //{
+        //    //    this.InvalidUsernameVisibility = Visibility.Visible;
+        //    //}
+        //    //else
+        //    //{
+        //    //    this.InvalidUsernameVisibility = Visibility.Hidden;
+        //    //}
+        //    //if (string.IsNullOrEmpty(this.Password))
+        //    //{
+        //    //    this.InvalidPasswordVisibility = Visibility.Visible;
+        //    //}
+        //    //else
+        //    //{
+        //    //    this.InvalidPasswordVisibility = Visibility.Hidden;
+        //    //}
+        //    //if (!string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password))
+        //    //{
+        //    return true;
+        //    //}
+        //    //return false;
+        //}
 
         public void RegisterExecuteHandler(object parameter)
         {
