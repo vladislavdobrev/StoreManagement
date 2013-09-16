@@ -26,7 +26,7 @@ namespace MelonStore.Api.Controllers
         [ActionName("all")]
         public HttpResponseMessage GetAll(string sessionKey)
         {
-            if (!String.IsNullOrEmpty(sessionKey))
+            if (String.IsNullOrEmpty(sessionKey))
             {
                 throw new ArgumentException("Not allowed action for non - logged user!");
             }
