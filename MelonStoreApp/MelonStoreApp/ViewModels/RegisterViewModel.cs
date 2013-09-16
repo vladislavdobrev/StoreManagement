@@ -22,10 +22,27 @@ namespace MelonStoreApp.ViewModels
         private string passwordMessage;
         private string password2Message;
 
+        private bool registerSuccessful;
+
         public RegisterViewModel()
         {
             this.Stores = Data.DataPersister.GetStores();
             this.RegisterCommand = new Commands.RelayCommand(this.RegisterExecuteHandler);
+            this.RegisterSuccessful = false;
+        }
+
+
+        public bool RegisterSuccessful
+        {
+            get { return registerSuccessful; }
+            set
+            {
+                if (registerSuccessful != value)
+                {
+                    registerSuccessful = value;
+                    OnPropertyChanged("RegisterSuccessful");
+                }
+            }
         }
 
         public List<string> Stores
@@ -168,11 +185,25 @@ namespace MelonStoreApp.ViewModels
             }
         }
 
+        public string ErrorMessage
+        {
+            get { return this.errorMessage; }
+            set
+            {
+                if (this.errorMessage != value)
+                {
+                    this.errorMessage = value;
+                    OnPropertyChanged("ErrorMessage");
+                }
+            }
+        }
+
         public Commands.RelayCommand RegisterCommand { get; set; }
 
         private void RegisterExecuteHandler(object parameter)
         {
             var isDataValid = true;
+            this.ErrorMessage = string.Empty;
             if (this.Store == null)
             {
                 this.StoreMessage = EmptyFieldMessage;
@@ -213,10 +244,25 @@ namespace MelonStoreApp.ViewModels
                 this.Password2Message = string.Empty;
             }
 
+            if (isDataValid && this.Password != this.Password2)
+            {
+                isDataValid = false;
+                this.ErrorMessage = PasswordsDoNotMatch;
+            }
+
             if (isDataValid)
             {
-                var success = Data.DataPersister.RegisterUser("shop","pesho", "peshopwd");
+                var success = Data.DataPersister.RegisterUser("shop", "pesho", "peshopwd");
                 //TODO
+                if (success != null)
+                {
+
+                    this.RegisterSuccessful = true;
+                }
+                else
+                {
+                    this.ErrorMessage = UsernameTakenMessage;
+                }
             }
         }
     }

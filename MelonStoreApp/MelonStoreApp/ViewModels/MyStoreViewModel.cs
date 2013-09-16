@@ -15,7 +15,6 @@ namespace MelonStoreApp.ViewModels
 
         public ObservableCollection<Product> Products { get; set; }
         public Product currentProduct;
-        public ProductViewModel productVM;
 
         public MyStoreViewModel()
         {
@@ -50,7 +49,6 @@ namespace MelonStoreApp.ViewModels
             //    Category = "Shoes",
             //    Amount = 23
             //};
-            this.productVM = new ProductViewModel();
             Binding b = new Binding();
 
         }
@@ -72,22 +70,5 @@ namespace MelonStoreApp.ViewModels
                 }
             }
         }
-
-        public ProductViewModel ProductVM
-        {
-            get
-            {
-                return this.productVM;
-            }
-            set
-            {
-                if (this.productVM != value)
-                {
-                    this.productVM = value;
-                    OnPropertyChanged("ProductVM");
-                }
-            }
-        }
-
     }
 }

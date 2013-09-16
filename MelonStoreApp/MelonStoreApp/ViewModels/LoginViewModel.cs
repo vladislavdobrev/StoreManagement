@@ -173,7 +173,6 @@ namespace MelonStoreApp.ViewModels
             else
             {
                 this.UsernameMessage = string.Empty;
-                isDataValid = false;
             }
 
             if (string.IsNullOrEmpty(this.Password))
@@ -188,7 +187,7 @@ namespace MelonStoreApp.ViewModels
 
             if (isDataValid)
             {
-                var success = Data.DataPersister.LoginUser("pesho", "pesho");
+                var success = Data.DataPersister.LoginUser(this.Username, this.Password);
 
                 if (success == null)
                 {

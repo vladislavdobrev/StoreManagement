@@ -1,9 +1,11 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.ComponentModel;
 
-namespace MelonStoreApp.ViewModels
+namespace MelonStoreApp.Models
 {
-    public abstract class ViewModelBase : DependencyObject, INotifyPropertyChanged
+    public class ModelPropertyChangedNotifier : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

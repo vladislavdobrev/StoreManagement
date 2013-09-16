@@ -52,25 +52,25 @@
 
             <TextBlock Text="Store" Grid.Row="0" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
             <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Stores}" Margin="10" SelectedItem="{Binding Store, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
-            <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource errorBlock}" Text="{Binding InvalidStoreVisibility}"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource errorBlock}" Text="{Binding StoreMessage}"/>
 
             <TextBlock Text="Username" Grid.Row="1" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
             <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource textBoxStyle}" Text="{Binding Username, Mode=TwoWay}"/>
-            <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource errorBlock}" Visibility="{Binding InvalidUsernameVisibility}"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource errorBlock}" Text="{Binding UsernameMessage}"/>
 
             <TextBlock Text="Password" Grid.Row="2" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
             <PasswordBox Grid.Row="2" Grid.Column="1" Style="{StaticResource passBoxStyle}" 
                      helpers:PasswordHelper.Attach="True"
                      helpers:PasswordHelper.Password="{Binding Password, Mode=TwoWay}"/>
-            <TextBlock Grid.Row="2" Grid.Column="2" Style="{StaticResource errorBlock}" Visibility="{Binding InvalidPasswordVisibility}"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Style="{StaticResource errorBlock}" Text="{Binding PasswordMessage}"/>
 
             <TextBlock Text="Repeat Password" Grid.Row="3" Grid.Column="0" Style="{StaticResource textBlockStyle}"/>
             <PasswordBox Grid.Row="3" Grid.Column="1" Style="{StaticResource passBoxStyle}" 
                      helpers:PasswordHelper.Attach="True"
                      helpers:PasswordHelper.Password="{Binding Password2, Mode=TwoWay}"/>
-            <TextBlock Grid.Row="3" Grid.Column="2" Style="{StaticResource errorBlock}" Visibility="{Binding InvalidPassword2Visibility}"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" Style="{StaticResource errorBlock}" Text="{Binding Password2Message}"/>
         </Grid>
         <TextBlock TextAlignment="Center" Foreground="Red" Text="{Binding ErrorMessage}"/>
-        <Button Content="Register" Width="100" Margin="20"/>
+        <Button Content="Register" Width="100" Margin="20" Command="{Binding RegisterCommand}"/>
     </StackPanel>
 </UserControl>
