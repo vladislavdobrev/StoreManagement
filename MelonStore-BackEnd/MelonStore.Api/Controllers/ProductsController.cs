@@ -16,6 +16,7 @@ namespace MelonStore.Api.Controllers
     public class ProductsController : ApiController
     {
         private DbProductRepository repo;
+        private DbProductStoreRepository storeProductRepo;
         private MelonStoreContext context;
 
         public ProductsController()
@@ -38,9 +39,9 @@ namespace MelonStore.Api.Controllers
                  {
                      Id = currProduct.Id,
                      Name = currProduct.Name,
-                     ImagePath = currProduct.Image.Url,
+                     ImageUrl = currProduct.Image.Url,
                  }).ToList();
-
+        
             return this.Request.CreateResponse(HttpStatusCode.OK, products);
         }
 
@@ -63,9 +64,51 @@ namespace MelonStore.Api.Controllers
                  {
                      Id = curr.Id,
                      Name = curr.Name,
+                     BasePrice = curr.BasePrice,
+                     Brand = curr.Brand,
+                     Category = curr.Category,
+                     Gender = curr.Gender,
+                     ImageUrl = curr.Image.Url,
                  }).ToList();
 
             return this.Request.CreateResponse(HttpStatusCode.OK, filtered);
+        }
+
+        [ActionName("AllNewProducts")]
+        public HttpResponseMessage GetAllNewProducts(string sessionKey)
+        {
+            this.storeProductRepo = new DbProductStoreRepository(context);
+
+            // in store
+            ICollection<ProductStore> productStoreNodes = this.storeProductRepo.All().ToList();
+            ICollection<Product> productsInStore = (from curr in productStoreNodes
+                                                    select curr.Product).ToList();
+
+            // all possible
+            IQueryable<Product> productsInWh = this.repo.All();
+
+            ICollection<ProductApiModel> newProducts = new List<ProductApiModel>();
+
+            foreach (var whProduct in productsInWh)
+            {
+                if (productsInStore.Contains(whProduct))
+                {
+                }
+                else
+                {
+                    newProducts.Add(new ProductApiModel()
+                    {
+                        Id = whProduct.Id,
+                        //ImageUrl = whProduct.Image.Url,
+                        Gender = whProduct.Gender,
+                        Category = whProduct.Category,
+                        Brand = whProduct.Brand,
+                        BasePrice = whProduct.BasePrice
+                    });
+                }
+            }
+            
+            return this.Request.CreateResponse(HttpStatusCode.OK, newProducts);
         }
     }
 }

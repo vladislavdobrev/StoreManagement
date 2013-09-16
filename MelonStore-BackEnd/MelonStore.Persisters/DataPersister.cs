@@ -13,6 +13,7 @@ namespace MelonStore.Persisters
     {
         private static MsClient httpClient;
         private static string sessionKey;
+        private static int storeId;
 
         static DataPersister()
         {
@@ -29,10 +30,19 @@ namespace MelonStore.Persisters
             return allProducts;
         }
 
+        public static ObservableCollection<ProductClientModel> AllNewProducts(string sessionKey)
+        {
+            ObservableCollection<ProductClientModel> allNewProducts =
+               httpClient.AllNewProducts(sessionKey);
+
+            return allNewProducts;
+        }
+
         // user
 
         public static string Register(UserRegisterClientModel registerModel)
         {
+            storeId = registerModel.StoreId;
             string result = httpClient.RegisterUser(registerModel);
 
             return result;
@@ -40,12 +50,14 @@ namespace MelonStore.Persisters
 
         public static string Login(UserLoginClientModel loginModel)
         {
-            string result = httpClient.LoginUserGetSessionKey(loginModel);
-            if (result.Contains("!"))
+            UserLoggedClientModel result = httpClient.LoginUserGetSessionKey(loginModel);
+
+            if (result.Username.Contains("!"))
             {
-                return result;
+                return result.Username;
             }
-            sessionKey = result;
+            storeId = result.StoreId;
+            sessionKey = result.SessionKey;
 
             return null;
         }

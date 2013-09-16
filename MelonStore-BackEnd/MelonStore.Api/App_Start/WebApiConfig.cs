@@ -22,10 +22,16 @@ namespace MelonStore.Api
                );
 
             config.Routes.MapHttpRoute(
-                  name: "Products",
+                  name: "StoreProducts",
                   routeTemplate: "api/{controller}/{action}",
                   defaults:new {controller = "storeproducts"}
             );
+
+            config.Routes.MapHttpRoute(
+                 name: "Products",
+                 routeTemplate: "api/{controller}/{action}",
+                 defaults: new { controller = "products" }
+           );
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

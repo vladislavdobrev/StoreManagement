@@ -22,7 +22,9 @@ namespace TempClient
             // client.RegisterUser(null);
             //client.LoginUserGetSessionKey(null);
             //client.Loggout(null);
-            client.GetAllStores("xaxa");
+            //client.GetAllStores("xaxa");
+            client.AllNewProducts("xaxa");
+
 
         }
     }

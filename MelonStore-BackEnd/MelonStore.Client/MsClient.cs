@@ -14,8 +14,8 @@ namespace MelonStore.Client
 {
     public class MsClient
     {
-        public const string PRODUCTS_GET_ALL = "/products?sessionKey=";
-        public const string PRODUCTS_POST_FILTERED = "/products?sessionKey=";
+        public const string PRODUCTS_GET_ALL = "/products/all?sessionKey=";
+        public const string PRODUCTS_POST_FILTERED = "/products/postFiltered?sessionKey=";
         public const string STOREPRODUCT_ADD_NEW = "/storeproducts?sessionKey=";
         public const string USER_REGISTER = "/users/register";
         public const string USER_LOGIN = "/users/login";
@@ -25,6 +25,7 @@ namespace MelonStore.Client
         public const string STOREPRODUCT_UPDATE_III = "&sessionKey=";
         public const string STOREPRODUCT_GET_ALL = "/storeproducts?sessionKey=";
         public const string STORE_GET_ALL = "/stores?sessionKey=";
+        public const string PRODUCTS_GET_ALL_NEW = "/products/AllNewProducts?sessionKey=";
 
         public const string BASE = "http://localhost:1671/api";
 
@@ -51,6 +52,23 @@ namespace MelonStore.Client
 
             return products;
         }
+
+
+        //get all new
+
+        public ObservableCollection<ProductClientModel> AllNewProducts(string sessionKey)
+        {
+            var response =
+               this.httpClient.GetAsync(MsClient.BASE + MsClient.PRODUCTS_GET_ALL + sessionKey).Result;
+
+            var result = response.Content.ReadAsStringAsync().Result;
+
+            ObservableCollection<ProductClientModel> allNew =
+               JsonConvert.DeserializeObject<ObservableCollection<ProductClientModel>>(result);
+
+            return allNew;
+        }
+
         // post
         public ObservableCollection<ProductClientModel> GetAllByFilters(FiltrationModel filtration, string sessionKey)
         {
@@ -147,10 +165,12 @@ namespace MelonStore.Client
 
             var result = response.Content.ReadAsStringAsync().Result;
 
+            // UserRegisterClientModel regModel = JsonConvert.DeserializeObject<UserRegisterClientModel>(result);
+
             return result;
         }
 
-        public string LoginUserGetSessionKey(UserLoginClientModel loginUser)
+        public UserLoggedClientModel LoginUserGetSessionKey(UserLoginClientModel loginUser)
         {
 
             SHA1 sha1 = new SHA1Cng();
@@ -169,10 +189,17 @@ namespace MelonStore.Client
 
             var result = response.Content.ReadAsStringAsync().Result;
 
-            //UserLoggedClientModel loggedUser =
-            //     JsonConvert.DeserializeObject<UserLoggedClientModel>(result);
-
-            return result;
+            try
+            {
+                UserLoggedClientModel loggedUser =
+                     JsonConvert.DeserializeObject<UserLoggedClientModel>(result);
+                return loggedUser;
+            }
+            catch (Exception ex)
+            {
+                return new UserLoggedClientModel() { Username = result };
+            }
+            return null;
         }
 
         public void Loggout(string sessionKey)

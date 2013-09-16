@@ -83,7 +83,12 @@ namespace MelonStore.Api.Controllers
                      Product = new ProductApiModel()
                      {
                          Name = currDbProduct.Product.Name,
-                         ImagePath = currDbProduct.Product.Image.Url
+                         ImageUrl = currDbProduct.Product.Image.Url,
+                         Id = currDbProduct.Product.Id,
+                         Gender = currDbProduct.Product.Gender,
+                         BasePrice = currDbProduct.Product.BasePrice,
+                         Category = currDbProduct.Product.Category,
+                         Brand = currDbProduct.Product.Brand
                      }
                  }).ToList();
 
@@ -108,7 +113,12 @@ namespace MelonStore.Api.Controllers
                 Product = new ProductApiModel()
                 {
                     Name = dbProduct.Product.Name,
-                    ImagePath = dbProduct.Product.Image.Url
+                    ImageUrl = dbProduct.Product.Image.Url,
+                     Brand = dbProduct.Product.Brand,
+                      Category = dbProduct.Product.Category,
+                       BasePrice = dbProduct.Product.BasePrice,
+                        Gender = dbProduct.Product.Gender,
+                         Id = dbProduct.Product.Id
                 },
             };
             return this.Request.CreateResponse(HttpStatusCode.OK, convertedProduct);

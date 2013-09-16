@@ -74,7 +74,7 @@ namespace MelonStore.Api.Controllers
                 }
                 User loggedUser = this.data.LoginUser(dbUser);
                 UserLoggedModel loggedModel = UserLoggedModel.CreateModel(loggedUser);
-                var response = this.Request.CreateResponse(HttpStatusCode.OK, loggedModel.SessionKey);
+                var response = this.Request.CreateResponse(HttpStatusCode.OK, loggedModel);
                 return response;
             });
         }
