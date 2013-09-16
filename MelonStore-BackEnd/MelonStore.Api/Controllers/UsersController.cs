@@ -65,16 +65,16 @@ namespace MelonStore.Api.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid user login model!");
+                    return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid user login model!");
                 }
                 User dbUser = this.data.Get(model.Username);
                 if (dbUser == null || model.Password != dbUser.Password)
                 {
-                    this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid username or password!");
+                    return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid username or password!");
                 }
                 User loggedUser = this.data.LoginUser(dbUser);
                 UserLoggedModel loggedModel = UserLoggedModel.CreateModel(loggedUser);
-                var response = this.Request.CreateResponse<UserLoggedModel>(HttpStatusCode.OK, loggedModel);
+                var response = this.Request.CreateResponse(HttpStatusCode.OK, loggedModel.SessionKey);
                 return response;
             });
         }

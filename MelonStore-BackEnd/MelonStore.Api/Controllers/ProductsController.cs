@@ -27,10 +27,10 @@ namespace MelonStore.Api.Controllers
         [ActionName("all")]
         public HttpResponseMessage GetAll(string sessionKey)
         {
-            if (String.IsNullOrEmpty(sessionKey))
-            {
-                throw new ArgumentException("Not allowed action for non - logged user!");
-            }
+            //if (String.IsNullOrEmpty(sessionKey))
+            //{
+            //    throw new ArgumentException("Not allowed action for non - logged user!");
+            //}
             IQueryable<Product> dbProducts = this.repo.All();
             ICollection<ProductApiModel> products =
                 (from currProduct in dbProducts
