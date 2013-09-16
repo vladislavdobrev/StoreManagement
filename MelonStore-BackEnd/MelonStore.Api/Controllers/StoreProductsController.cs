@@ -28,7 +28,7 @@ namespace MelonStore.Api.Controllers
         [ActionName("add")]
         public HttpResponseMessage PostAdd(ProductStoreApiFullDescModel futureProductStore, string sessionKey)
         {
-            if (!String.IsNullOrEmpty(sessionKey))
+            if (String.IsNullOrEmpty(sessionKey))
             {
                 throw new ArgumentException("Not allowed action for non - logged user!");
             }
@@ -48,7 +48,7 @@ namespace MelonStore.Api.Controllers
         [ActionName("update")]
         public HttpResponseMessage PutUpdate(int productId, int storeId, ProductStoreApiSellBuyModel product, string sessionKey)
         {
-            if (!String.IsNullOrEmpty(sessionKey))
+            if (String.IsNullOrEmpty(sessionKey))
             {
                 throw new ArgumentException("Not allowed action for non - logged user!");
             }
@@ -67,7 +67,7 @@ namespace MelonStore.Api.Controllers
         [ActionName("all")]
         public HttpResponseMessage GetAll(string sessionKey)
         {
-            if (!String.IsNullOrEmpty(sessionKey))
+            if (String.IsNullOrEmpty(sessionKey))
             {
                 throw new ArgumentException("Not allowed action for non - logged user!");
             }
@@ -93,7 +93,7 @@ namespace MelonStore.Api.Controllers
         [ActionName("get")]
         public HttpResponseMessage Get(int productId, int storeId, string sessionKey)
         {
-            if (!String.IsNullOrEmpty(sessionKey))
+            if (String.IsNullOrEmpty(sessionKey))
             {
                 throw new ArgumentException("Not allowed action for non - logged user!");
             }
@@ -117,7 +117,7 @@ namespace MelonStore.Api.Controllers
         [ActionName("postFiltered")]
         public HttpResponseMessage PostFiltered(FiltrationModel filter, int storeId, string sessionKey)
         {
-            if (!String.IsNullOrEmpty(sessionKey))
+            if (String.IsNullOrEmpty(sessionKey))
             {
                 throw new ArgumentException("Not allowed action for non - logged user!");
             }

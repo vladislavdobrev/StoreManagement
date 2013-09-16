@@ -72,7 +72,8 @@ namespace MelonStore.Repositories
             {
                 throw new InvalidOperationException(string.Format("User with nickname {0} already exists!", user.Username));
             }
-
+            //DbStoreRepository r = new DbStoreRepository();
+            
             this.DbSet.Add(user);
             this.Context.SaveChanges();
 

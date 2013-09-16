@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{74A9438A-1D56-44C7-B354-58A6FE6DF251}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{0A7F76AD-C961-4441-A87A-CA162E72C80F}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TempClient</RootNamespace>
-    <AssemblyName>TempClient</AssemblyName>
+    <RootNamespace>MelonStore.Client</RootNamespace>
+    <AssemblyName>MelonStore.Client</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,13 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,26 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="MsClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MelonStore.Client\MelonStore.Client.csproj">
-      <Project>{0a7f76ad-c961-4441-a87a-ca162e72c80f}</Project>
-      <Name>MelonStore.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MelonStore.Data\MelonStore.Data.csproj">
-      <Project>{2bdf74ca-3da0-43ac-b6e0-d990b39d77bd}</Project>
-      <Name>MelonStore.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MelonStore.Models\MelonStore.Models.csproj">
-      <Project>{ddeda995-34c7-4bc9-9b1c-66d7f451939c}</Project>
-      <Name>MelonStore.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MelonStoreClient.Models\MelonStoreClient.Models.csproj">
       <Project>{448cb313-44ed-47d1-8422-19a37033e0af}</Project>
       <Name>MelonStoreClient.Models</Name>

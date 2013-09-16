@@ -17,6 +17,9 @@ namespace MelonStore.Api.Models
         [DataMember(Name = "sessionKey")]
         public string SessionKey { get; set; }
 
+        [DataMember(Name = "storeId")]
+        public int? StoreId { get; set; }
+
         public static UserLoggedModel CreateModel(User user)
         {
             UserLoggedModel model = new UserLoggedModel()
@@ -24,6 +27,7 @@ namespace MelonStore.Api.Models
                 Id = user.Id,
                 Username = user.Username,
                 SessionKey = user.SessionKey,
+                StoreId = user.Store_Id,
             };
 
             return model;

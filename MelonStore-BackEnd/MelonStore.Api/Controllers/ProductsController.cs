@@ -27,7 +27,7 @@ namespace MelonStore.Api.Controllers
         [ActionName("all")]
         public HttpResponseMessage GetAll(string sessionKey)
         {
-            if (!String.IsNullOrEmpty(sessionKey))
+            if (String.IsNullOrEmpty(sessionKey))
             {
                 throw new ArgumentException("Not allowed action for non - logged user!");
             }
@@ -36,6 +36,7 @@ namespace MelonStore.Api.Controllers
                 (from currProduct in dbProducts
                  select new ProductApiModel()
                  {
+                     Id = currProduct.Id,
                      Name = currProduct.Name,
                      ImagePath = currProduct.Image.Url,
                  }).ToList();
@@ -44,9 +45,9 @@ namespace MelonStore.Api.Controllers
         }
 
         [ActionName("postFiltered")]
-        public HttpResponseMessage PostFiltered(FiltrationModel filter,string sessionKey)
+        public HttpResponseMessage PostFiltered(FiltrationModel filter, string sessionKey)
         {
-            if (!String.IsNullOrEmpty(sessionKey))
+            if (String.IsNullOrEmpty(sessionKey))
             {
                 throw new ArgumentException("Not allowed action for non - logged user!");
             }
@@ -56,7 +57,15 @@ namespace MelonStore.Api.Controllers
 
             ICollection<Product> dbFiltered = this.repo.Get(gen, cat);
 
-            return this.Request.CreateResponse(HttpStatusCode.OK, dbFiltered);
+            ICollection<ProductApiModel> filtered =
+                (from curr in dbFiltered
+                 select new ProductApiModel()
+                 {
+                     Id = curr.Id,
+                     Name = curr.Name,
+                 }).ToList();
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, filtered);
         }
     }
 }

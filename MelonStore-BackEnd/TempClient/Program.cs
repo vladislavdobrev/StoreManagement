@@ -1,4 +1,5 @@
-﻿using MelonStore.Data;
+﻿using MelonStore.Client;
+using MelonStore.Data;
 using MelonStore.Models;
 using System;
 using System.Collections.Generic;
@@ -8,15 +9,17 @@ using System.Threading.Tasks;
 
 namespace TempClient
 {
-    class Program
+    internal class Program
     {
         public static void Main(string[] args)
         {
-            MelonStoreContext context = new MelonStoreContext();
-            context.Products.Add(new Product() 
-            {  
-                Name = "test",
-            });
+            MsClient client = new MsClient();
+
+            // var resultget =  client.GetAllProducts("xaxa");
+            // var result = client.GetAllByFilters(null,"xaxa");
+            // client.PostStoreProductNode(null,"xaxa");
+            client.RegisterUser(null);
+
         }
     }
 }

@@ -48,9 +48,9 @@ namespace MelonStore.Api.Controllers
                 var dbUser = this.data.Add(user);
                 var userLoggedModel = UserLoggedModel.CreateModel(dbUser);
 
-                var response = this.Request.CreateResponse<UserLoggedModel>(HttpStatusCode.Created, userLoggedModel);
-                var resourceLink = Url.Link("UsersGetApi", new { id = userLoggedModel.Id });
-                response.Headers.Location = new Uri(resourceLink);
+                var response = this.Request.CreateResponse(HttpStatusCode.Created);
+                //var resourceLink = Url.Link("UsersGetApi", new { id = userLoggedModel.Id });
+                //response.Headers.Location = new Uri(resourceLink);
                 return response;
             });
         }
