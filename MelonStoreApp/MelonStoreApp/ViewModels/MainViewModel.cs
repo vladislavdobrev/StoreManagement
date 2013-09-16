@@ -11,15 +11,13 @@ namespace MelonStoreApp.ViewModels
         {
             this.LoginVM = new ViewModels.LoginViewModel();
             this.RegisterVM = new ViewModels.RegisterViewModel();
-            //this.HomeVM = new ViewModels.
+            this.HomeVM = new ViewModels.HomeViewModel();
 
             this.Login = new Views.Login { DataContext = this.LoginVM };
             this.Register = new Views.Register { DataContext = this.RegisterVM };
-            this.Home = new Views.Home();
+            this.Home = new Views.Home() { DataContext = this.HomeVM };
 
             this.LoginVM.PropertyChanged += LoginVM_PropertyChanged;
-
-
             this.CurrentView = Login;
         }
 
