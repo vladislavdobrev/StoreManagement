@@ -4,25 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:views="clr-namespace:MelonStoreApp.Views"
+             xmlns:converters="clr-namespace:MelonStoreApp.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:ClassToStringConverter x:Key="classToStringConverter"/>
+    </UserControl.Resources>
     <Grid>
-        <TabControl>
-            <TabItem Header="Highlights" IsSelected="True">
-                <views:HighLights/>
-            </TabItem>
-            <TabItem Header="MyStore">
-                <views:MyStore/>
-            </TabItem>
-            <TabItem Header="Warehouse">
-                <views:Warehouse/>
-            </TabItem>
-            <TabItem Header="Cart">
-                <views:Cart/>
-            </TabItem>
-            <TabItem Header="Product">
-                <views:Product/>
-            </TabItem>
+        <TabControl ItemsSource="{Binding Views}">
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="Header" Value="{Binding Converter={StaticResource classToStringConverter}}" />
+                </Style>
+            </TabControl.ItemContainerStyle>
+
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <UserControl Content="{Binding}"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
         </TabControl>
     </Grid>
 </UserControl>
