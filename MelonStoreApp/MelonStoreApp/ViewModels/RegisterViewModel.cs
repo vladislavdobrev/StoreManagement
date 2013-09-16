@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MelonStore.Persisters;
+using MelonStoreClient.Models;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -252,7 +254,7 @@ namespace MelonStoreApp.ViewModels
 
             if (isDataValid)
             {
-                var success = Data.DataPersister.RegisterUser("shop", "pesho", "peshopwd");
+                var success = DataPersister.Register(new UserRegisterClientModel() { Username = this.username, Password = this.password });
                 //TODO
                 if (success != null)
                 {

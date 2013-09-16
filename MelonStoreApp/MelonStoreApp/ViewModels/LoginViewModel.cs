@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MelonStore.Persisters;
+using MelonStoreClient.Models;
+using System;
 using System.Windows;
 
 namespace MelonStoreApp.ViewModels
@@ -187,13 +189,13 @@ namespace MelonStoreApp.ViewModels
 
             if (isDataValid)
             {
-                var success = Data.DataPersister.LoginUser(this.Username, this.Password);
+                var success = DataPersister.Login(new UserLoginClientModel() { Username = this.Username, Password = this.Password });
 
-                if (success == null)
+                if (success != null)
                 {
                     this.UsernameMessage = string.Empty;
                     this.PasswordMessage = string.Empty;
-                    this.ErrorMessage = InvalidDataMessage;
+                    this.ErrorMessage = success;
                 }
                 else
                 {

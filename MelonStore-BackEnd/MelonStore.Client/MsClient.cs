@@ -8,6 +8,7 @@ using MelonStoreClient.Models;
 using Newtonsoft.Json;
 using MelonStore.Client.Models;
 using System.Security.Cryptography;
+using System.Collections.ObjectModel;
 
 namespace MelonStore.Client
 {
@@ -33,15 +34,15 @@ namespace MelonStore.Client
         // products service consumming
 
         //get
-        public ICollection<ProductClientModel> GetAllProducts(string sessionKey)
+        public ObservableCollection<ProductClientModel> GetAllProducts(string sessionKey)
         {
             var response =
                 this.httpClient.GetAsync(MsClient.BASE + MsClient.PRODUCTS_GET_ALL + sessionKey).Result;
 
             var result = response.Content.ReadAsStringAsync().Result;
 
-            ICollection<ProductClientModel> products =
-                JsonConvert.DeserializeObject<ICollection<ProductClientModel>>(result);
+            ObservableCollection<ProductClientModel> products =
+                JsonConvert.DeserializeObject<ObservableCollection<ProductClientModel>>(result);
 
             return products;
         }
@@ -125,10 +126,10 @@ namespace MelonStore.Client
 
             var result = response.Content.ReadAsStringAsync().Result;
 
-            UserLoggedClientModel loggedUser =
-                 JsonConvert.DeserializeObject<UserLoggedClientModel>(result);
+            //UserLoggedClientModel loggedUser =
+            //     JsonConvert.DeserializeObject<UserLoggedClientModel>(result);
 
-            return loggedUser.SessionKey;
+            return result;
         }
 
         public void Loggout(string sessionKey)

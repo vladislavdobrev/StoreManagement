@@ -168,7 +168,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\MelonStore-BackEnd\MelonStore.Persisters\MelonStore.Persisters.csproj">
+      <Project>{ddf0ef0e-bc4d-4c6a-9f95-e4d492f2b2c2}</Project>
+      <Name>MelonStore.Persisters</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MelonStore-BackEnd\MelonStoreClient.Models\MelonStoreClient.Models.csproj">
+      <Project>{448cb313-44ed-47d1-8422-19a37033e0af}</Project>
+      <Name>MelonStoreClient.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\logo.jpg" />
     <Resource Include="Image\shoe.jpg" />
