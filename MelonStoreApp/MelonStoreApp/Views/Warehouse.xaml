@@ -5,11 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:views ="clr-namespace:MelonStoreApp.Views"
              mc:Ignorable="d" 
-            >
+             >
     <StackPanel>
         <StackPanel Orientation="Horizontal">
             <Button Content="All" Margin="10" Command="{Binding ShowAllProductsCommand}"/>
-
             <ItemsControl  ItemsSource="{Binding Categories}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -24,7 +23,10 @@
             </ItemsControl>
         </StackPanel>
 
-        <views:Product DataContext="{Binding CurrentProduct}"/>
+        <WrapPanel  Visibility="{Binding IsInfoVisible}">
+            <views:Product DataContext="{Binding CurrentProduct}"/>
+            <Button Content="Hide" Command="{Binding HideInfoCommand}" VerticalAlignment="Top" Margin="-30,0,0,0"/>
+        </WrapPanel>
 
         <DataGrid ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserAddRows="False" MaxHeight="300" CurrentItem="{Binding CurrentProduct, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True">
             <DataGrid.Columns>
@@ -36,18 +38,45 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="+"/>
+                            <Button Content="i" Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                    AncestorType={x:Type UserControl}}, Path=DataContext.ShowInfoCommand}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="i"/>
+                            <StackPanel>
+                                <Button Content="+" Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                        AncestorType={x:Type UserControl}}, Path=DataContext.StartOrderingCommand}"/>
+                            </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Popup IsOpen="{Binding IsOrdering}" StaysOpen="False">
+            <Border Background="White" BorderBrush="Gray" BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Amount" TextAlignment="Right" Margin="5" VerticalAlignment="Center" Foreground="Black" Width="50"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="50" Text="{Binding OrderAmount,Mode=TwoWay}" Margin="5"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Price" TextAlignment="Right" Margin="5" VerticalAlignment="Center" Foreground="Black" Width="50"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="50" Text="{Binding OrderPrice,Mode=TwoWay}" Margin="5"/>
+                    
+                    <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Add" Command="{Binding AddToCartCommand}" Margin="5" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+        </Popup>
     </StackPanel>
 </UserControl>
