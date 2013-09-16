@@ -9,6 +9,7 @@ namespace MelonStoreApp.ViewModels
 {
     public class WarehouseViewModel : ViewModelBase
     {
+        private Product lastCurrentProduct;
         private Product currentProduct;
         private Visibility isInfoVisible;
         private bool isOrdering;
@@ -71,6 +72,21 @@ namespace MelonStoreApp.ViewModels
             }
         }
 
+        public Product LastCurrentProduct
+        {
+            get
+            {
+                return this.lastCurrentProduct;
+            }
+            set
+            {
+                if (this.lastCurrentProduct != value)
+                {
+                    this.lastCurrentProduct = value;
+                }
+            }
+        }
+
         public Product CurrentProduct
         {
             get
@@ -85,6 +101,20 @@ namespace MelonStoreApp.ViewModels
                     if (value == null)
                     {
                         this.IsInfoVisible = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        this.LastCurrentProduct = new Product()
+                        {
+                            Amount = value.Amount,
+                            Brand = value.Brand,
+                            Category = value.Category,
+                            Count = value.Count,
+                            Id = value.Id,
+                            Image = value.Image,
+                            Name = value.Name,
+                            Price = value.Price
+                        };
                     }
                     OnPropertyChanged("CurrentProduct");
                 }
@@ -173,10 +203,10 @@ namespace MelonStoreApp.ViewModels
         {
             if (this.OrderAmount > 0 && this.OrderPrice > 0)
             {
-                Product newProduct = this.CurrentProduct;
+                Product newProduct = this.LastCurrentProduct;
                 newProduct.Amount = this.OrderAmount;
                 newProduct.Price = this.OrderPrice;
-                CartViewModel.CartProducts.Add(newProduct);
+                CartViewModel.AddProduct(newProduct);
             }
 
             IsOrdering = false;

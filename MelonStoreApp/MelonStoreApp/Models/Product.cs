@@ -1,5 +1,4 @@
-﻿using System.Windows;
-namespace MelonStoreApp.Models
+﻿namespace MelonStoreApp.Models
 {
     public class Product
     {

@@ -54,7 +54,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Popup IsOpen="{Binding IsOrdering}" StaysOpen="False">
+        <Popup IsOpen="{Binding IsOrdering}" StaysOpen="False" VerticalOffset="300" HorizontalOffset="300">
             <Border Background="White" BorderBrush="Gray" BorderThickness="1">
                 <Grid>
                     <Grid.RowDefinitions>

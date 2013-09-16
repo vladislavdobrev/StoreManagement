@@ -2,6 +2,7 @@
 using MelonStoreApp.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace MelonStoreApp.ViewModels
@@ -11,9 +12,9 @@ namespace MelonStoreApp.ViewModels
         private Product currentProduct;
         private static ObservableCollection<Product> cartProducts;
 
-        private ICommand removeItemCommand;
+        private RelayCommand removeItemCommand;
 
-        public ICommand RemoveItem
+        public RelayCommand RemoveItemCommand
         {
             get
             {
@@ -33,6 +34,7 @@ namespace MelonStoreApp.ViewModels
                 {
                     CartProducts = new ObservableCollection<Product>();
                 }
+
                 return cartProducts;
             }
             set
@@ -47,6 +49,20 @@ namespace MelonStoreApp.ViewModels
                 {
                     cartProducts.Add(item);
                 }
+            }
+        }
+
+        public static void AddProduct(Product product)
+        {
+            var p = cartProducts.FirstOrDefault(x => x.Id == product.Id);
+            if (p != null)
+            {
+                CartProducts.Remove(p);
+                cartProducts.Add(product);
+            }
+            else
+            {
+                CartProducts.Add(product);
             }
         }
 
@@ -73,9 +89,9 @@ namespace MelonStoreApp.ViewModels
                 if (item == this.CurrentProduct)
                 {
                     cartProducts.Remove(item);
+                    break;
                 }
             }
         }
-
     }
 }

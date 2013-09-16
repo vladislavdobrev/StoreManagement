@@ -22,24 +22,12 @@
                 <DataGridTextColumn Header="Brand" Binding="{Binding Brand, Mode=TwoWay}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Category" Binding="{Binding Category, Mode=TwoWay}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="BasePrice" Binding="{Binding BasePrice, Mode=TwoWay}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount, Mode=TwoWay}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="NewPrice" Binding="{Binding Price, Mode=TwoWay}" IsReadOnly="True"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="+"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="i"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Remove" Command="{Binding RemoveItem}"/>
+                            <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RemoveItemCommand}" Content="Remove"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

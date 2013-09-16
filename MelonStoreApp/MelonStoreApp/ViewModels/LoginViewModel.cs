@@ -189,14 +189,13 @@ namespace MelonStoreApp.ViewModels
 
             if (isDataValid)
             {
-              //  var success = DataPersister.Login(new UserLoginClientModel() { Username = this.Username, Password = this.Password });
-                string errorMessage = null;
+                var success = DataPersister.Login(new UserLoginClientModel() { Username = this.Username, Password = this.Password });
 
-                if (errorMessage != null)
+                if (success != null)
                 {
                     this.UsernameMessage = string.Empty;
                     this.PasswordMessage = string.Empty;
-                    this.ErrorMessage = errorMessage;
+                    this.ErrorMessage = success;
                 }
                 else
                 {
