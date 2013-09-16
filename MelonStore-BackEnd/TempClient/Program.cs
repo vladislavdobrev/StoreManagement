@@ -15,12 +15,14 @@ namespace TempClient
         {
             MsClient client = new MsClient();
 
-            // var resultget =  client.GetAllProducts("xaxa");
+            //var resultget =  client.GetAllProducts("xaxa");
             // var result = client.GetAllByFilters(null,"xaxa");
-            client.PostStoreProductNode(null,"xaxa");
+            //client.PostStoreProductNode(null,"xaxa");
+            //client.PutStoreProductNode(null, "xaxa");
             // client.RegisterUser(null);
             //client.LoginUserGetSessionKey(null);
             //client.Loggout(null);
+            client.GetAllStores("xaxa");
 
         }
     }

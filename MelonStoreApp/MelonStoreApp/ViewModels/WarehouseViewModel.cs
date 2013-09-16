@@ -23,7 +23,7 @@ namespace MelonStoreApp.ViewModels
                 Categories.Add(new Category { Name = category, IsEnabled = true });
             }
 
-            this.Products = DataPersister.GetStoreProducts();
+            this.Products = DataPersister.GetAllStoreProducts();
 
             this.ShowAllProductsCommand = new RelayCommand(ShowAllProductsExecuteHandler);
         }

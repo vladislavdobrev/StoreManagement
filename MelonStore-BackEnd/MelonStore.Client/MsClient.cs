@@ -20,6 +20,11 @@ namespace MelonStore.Client
         public const string USER_REGISTER = "/users/register";
         public const string USER_LOGIN = "/users/login";
         public const string USER_LOGOUT = "/users/logout?sessionKey=";
+        public const string STOREPRODUCT_UPDATE_I = "/storeproducts?productId=";
+        public const string STOREPRODUCT_UPDATE_II = "&storeId=";
+        public const string STOREPRODUCT_UPDATE_III = "&sessionKey=";
+        public const string STOREPRODUCT_GET_ALL = "/storeproducts?sessionKey=";
+        public const string STORE_GET_ALL = "/stores?sessionKey=";
 
         public const string BASE = "http://localhost:1671/api";
 
@@ -47,7 +52,7 @@ namespace MelonStore.Client
             return products;
         }
         // post
-        public ICollection<ProductClientModel> GetAllByFilters(FiltrationModel filtration, string sessionKey)
+        public ObservableCollection<ProductClientModel> GetAllByFilters(FiltrationModel filtration, string sessionKey)
         {
             HttpContent postContent = new StringContent(JsonConvert.SerializeObject(filtration));
             postContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
@@ -57,8 +62,8 @@ namespace MelonStore.Client
 
             var result = response.Content.ReadAsStringAsync().Result;
 
-            ICollection<ProductClientModel> products =
-                JsonConvert.DeserializeObject<ICollection<ProductClientModel>>(result);
+            ObservableCollection<ProductClientModel> products =
+                JsonConvert.DeserializeObject<ObservableCollection<ProductClientModel>>(result);
 
             return products;
         }
@@ -68,6 +73,14 @@ namespace MelonStore.Client
         // add new
         public void PostStoreProductNode(StoreProductClientFullDescModel node, string sessionKey)
         {
+            //node = new StoreProductClientFullDescModel()
+            //{
+            //    ProductId = 2,
+            //    StoreId = 1,
+            //    Count = 100,
+            //    Price = 12,
+            //};
+
             HttpContent postContent = new StringContent(JsonConvert.SerializeObject(node));
             postContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
@@ -78,10 +91,40 @@ namespace MelonStore.Client
         }
 
         // update existing
-        //public void PutStoreProductNode(int productId, int storeId,)
-        //{
-        //
-        //}
+        public void PutStoreProductNode(StoreProductClientModel modelToUpdate, string sessionKey)
+        {
+
+            //modelToUpdate = new StoreProductClientModel()
+            //{
+            //    ProductId = 2,
+            //    StoreId = 1,
+            //    Count = 150,
+            //    Price = 40
+            //};
+
+            HttpContent postContent = new StringContent(JsonConvert.SerializeObject(modelToUpdate));
+            postContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            var response =
+                this.httpClient.PutAsync(MsClient.BASE + MsClient.STOREPRODUCT_UPDATE_I + modelToUpdate.ProductId
+                + MsClient.STOREPRODUCT_UPDATE_II + modelToUpdate.StoreId + MsClient.STOREPRODUCT_UPDATE_III + sessionKey, postContent).Result;
+
+            var result = response.Content.ReadAsStringAsync().Result;
+        }
+
+        public ObservableCollection<StoreProductClientModel> GetAllStoreProducts(string sessionKey)
+        {
+            var response =
+                this.httpClient.GetAsync(MsClient.BASE + MsClient.STOREPRODUCT_GET_ALL).Result;
+
+            var result = response.Content.ReadAsStringAsync().Result;
+
+            ObservableCollection<StoreProductClientModel> all =
+                JsonConvert.DeserializeObject<ObservableCollection<StoreProductClientModel>>(result);
+
+            return all;
+        }
+
 
         // users service consumming
 
@@ -136,6 +179,21 @@ namespace MelonStore.Client
         {
             var response =
                 this.httpClient.PutAsync(MsClient.BASE + MsClient.USER_LOGOUT + sessionKey, null).Result;
+        }
+
+        // store service consumming
+
+        public ObservableCollection<StoreClientModel> GetAllStores(string sessionKey)
+        {
+            var response =
+                this.httpClient.GetAsync(MsClient.BASE + MsClient.STORE_GET_ALL + sessionKey).Result;
+
+            var result = response.Content.ReadAsStringAsync().Result;
+
+            ObservableCollection<StoreClientModel> all =
+                JsonConvert.DeserializeObject<ObservableCollection<StoreClientModel>>(result);
+
+            return all;
         }
     }
 }

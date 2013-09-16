@@ -19,11 +19,17 @@ namespace MelonStore.Persisters
             httpClient = new MsClient();
         }
 
-        public static ICollection<ProductClientModel> GetAllProducts(string sessionKey)
-        {
+        // products
 
-            return null;
+        public static ObservableCollection<ProductClientModel> GetAllProducts(string sessionKey)
+        {
+            ObservableCollection<ProductClientModel> allProducts =
+                httpClient.GetAllProducts(sessionKey);
+
+            return allProducts;
         }
+
+        // user
 
         public static string Register(UserRegisterClientModel registerModel)
         {
@@ -44,10 +50,30 @@ namespace MelonStore.Persisters
             return null;
         }
 
-        public static ObservableCollection<ProductClientModel> GetStoreProducts()
+        // storeproducts
+
+        public static ObservableCollection<ProductClientModel> GetAllStoreProducts()
         {
             ObservableCollection<ProductClientModel> result =
                 httpClient.GetAllProducts(sessionKey);
+
+            return result;
+        }
+
+        public static void AddNewProductToStore(StoreProductClientFullDescModel newNode)
+        {
+            httpClient.PostStoreProductNode(newNode, sessionKey);
+        }
+
+        public static void UpdateProductFromStore(StoreProductClientModel nodeToUpdate)
+        {
+            httpClient.PutStoreProductNode(nodeToUpdate, sessionKey);
+        }
+
+        public static ObservableCollection<StoreClientModel> GetAllStores()
+        {
+            ObservableCollection<StoreClientModel> result =
+                httpClient.GetAllStores(sessionKey);
 
             return result;
         }
