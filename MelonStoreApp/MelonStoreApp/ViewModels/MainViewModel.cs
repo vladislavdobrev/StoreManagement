@@ -18,15 +18,39 @@ namespace MelonStoreApp.ViewModels
             this.Home = new Views.Home() { DataContext = this.HomeVM };
 
             this.LoginVM.PropertyChanged += LoginVM_PropertyChanged;
+            this.RegisterVM.PropertyChanged += RegisterVM_PropertyChanged;
             this.CurrentView = Login;
+        }
+
+        void RegisterVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "RegisterSuccessful")
+            {
+                if ((this.RegisterVM as RegisterViewModel).RegisterSuccessful == true)
+                {
+                    this.CurrentView = this.Home;
+                }
+
+                return;
+            }
         }
 
         void LoginVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case "IsUserLogged": this.CurrentView = this.Home; return;
-                case "IsRegistering": this.CurrentView = this.Register; return;
+                case "IsUserLogged":
+                    if ((this.LoginVM as LoginViewModel).IsUserLogged == true)
+                    {
+                        this.CurrentView = this.Home;
+                    }
+                    return;
+                case "IsRegistering":
+                    if ((this.LoginVM as LoginViewModel).IsRegistering == true)
+                    {
+                        this.CurrentView = this.Register;
+                    } 
+                    return;
             }
 
         }

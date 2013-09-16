@@ -3,20 +3,9 @@ namespace MelonStoreApp.Data
 {
     public class DataPersister
     {
-        internal static string LoginUser(string username, string password)
+        internal static object LoginUser(string username, string password)
         {
-            var userModel = new Models.User
-            {
-                Username = username,
-                Password = password
-            };
-
-            //var loginResponse = HttpRequester.Post<LoginResponseModel>(BaseServicesUrl + "auth/token",
-            //    userModel);
-            //AccessToken = loginResponse.AccessToken;
-            //return loginResponse.Username;
-
-            return username;
+            return true;
         }
 
         internal static List<string> GetStores()
@@ -26,7 +15,7 @@ namespace MelonStoreApp.Data
 
         internal static object RegisterUser(string store, string username, string password)
         {
-            throw new System.NotImplementedException();
+            return true;
         }
     }
 }

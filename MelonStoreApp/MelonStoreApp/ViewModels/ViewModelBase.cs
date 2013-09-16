@@ -27,6 +27,5 @@ namespace MelonStoreApp.ViewModels
                 OnPropertyChanged("MyProperty");
             }
         }
-
     }
 }

@@ -173,7 +173,6 @@ namespace MelonStoreApp.ViewModels
             else
             {
                 this.UsernameMessage = string.Empty;
-                isDataValid = false;
             }
 
             if (string.IsNullOrEmpty(this.Password))
