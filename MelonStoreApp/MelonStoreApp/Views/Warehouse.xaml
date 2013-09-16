@@ -46,10 +46,9 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
-                                <Button Content="+" Command="{Binding RelativeSource={RelativeSource FindAncestor, 
-                                        AncestorType={x:Type UserControl}}, Path=DataContext.StartOrderingCommand}"/>
-                            </StackPanel>
+                            <Button Content="+"
+                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.StartOrderingCommand}" 
+                                        CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -73,7 +72,7 @@
 
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Price" TextAlignment="Right" Margin="5" VerticalAlignment="Center" Foreground="Black" Width="50"/>
                     <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="50" Text="{Binding OrderPrice,Mode=TwoWay}" Margin="5"/>
-                    
+
                     <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Add" Command="{Binding AddToCartCommand}" Margin="5" VerticalAlignment="Center"/>
                 </Grid>
             </Border>
