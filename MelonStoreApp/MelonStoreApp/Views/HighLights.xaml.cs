@@ -6,9 +6,9 @@ namespace MelonStoreApp.Views
     /// <summary>
     /// Interaction logic for HighLights.xaml
     /// </summary>
-    public partial class HighLights : UserControl
+    public partial class Highlights : UserControl
     {
-        public HighLights()
+        public Highlights()
         {
             InitializeComponent();
             this.forDiscount.ItemsSource = new List<Models.Product>()

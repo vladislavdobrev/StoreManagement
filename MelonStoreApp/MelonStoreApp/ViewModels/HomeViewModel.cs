@@ -11,23 +11,25 @@ namespace MelonStoreApp.ViewModels
     {
         public HomeViewModel()
         {
-            this.HighlightsVM = new HighlightsViewModel();
+            this.ViewModels = new ObservableCollection<ViewModelBase>();
+            this.Views = new ObservableCollection<UserControl>();
 
+            this.ViewModels.Add(new HighlightsViewModel());
+            this.Views.Add(new Views.Highlights { DataContext = this.ViewModels.Last() });
 
-            this.Highlights = new Views.HighLights { DataContext = this.HighlightsVM };
-            this.MyStore = new Views.MyStore() { DataContext = this.MyStoreVM};
-            this.Warehouse = new Views.Warehouse();
-            this.Cart = new Views.Cart();
+            this.ViewModels.Add(new MyStoreViewModel());
+            this.Views.Add(new Views.MyStore { DataContext = this.ViewModels.Last() });
+
+            this.ViewModels.Add(new WarehouseViewModel());
+            this.Views.Add(new Views.Warehouse { DataContext = this.ViewModels.Last() });
+
+            this.ViewModels.Add(new CartViewModel());
+            this.Views.Add(new Views.Cart { DataContext = this.ViewModels.Last() });
         }
 
-        public ViewModelBase HighlightsVM { get; set; }
-        public ViewModelBase MyStoreVM { get; set; }
-        public ViewModelBase WarehouseVM { get; set; }
-        public ViewModelBase CartVM { get; set; }
+        public ObservableCollection<UserControl> Views { get; set; }
 
-        public UserControl Highlights { get; set; }
-        public UserControl MyStore { get; set; }
-        public UserControl Warehouse { get; set; }
-        public UserControl Cart { get; set; }
+        public ObservableCollection<ViewModelBase> ViewModels { get; set; }
+
     }
 }

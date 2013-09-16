@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MelonStoreApp.ViewModels
 {
-    public class WarehouseViewModel
+    public class WarehouseViewModel : ViewModelBase
     {
     }
 }
