@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MelonStore.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,7 @@ namespace MelonStore.Repositories
         where T : class
     {
         IQueryable<T> All();
+
+        Store Get(int id);
     }
 }

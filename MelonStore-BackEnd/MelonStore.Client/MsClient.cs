@@ -17,6 +17,8 @@ namespace MelonStore.Client
         public const string PRODUCTS_POST_FILTERED = "/products?sessionKey=";
         public const string STOREPRODUCT_ADD_NEW = "/storeproducts?sessionKey=";
         public const string USER_REGISTER = "/users/register";
+        public const string USER_LOGIN = "/users/login";
+        public const string USER_LOGOUT = "/users/logout?sessionKey=";
 
         public const string BASE = "http://localhost:1671/api";
 
@@ -62,6 +64,7 @@ namespace MelonStore.Client
 
         // storeproducts service consumming
 
+        // add new
         public void PostStoreProductNode(StoreProductClientFullDescModel node, string sessionKey)
         {
             HttpContent postContent = new StringContent(JsonConvert.SerializeObject(node));
@@ -73,17 +76,17 @@ namespace MelonStore.Client
             var result = response.Content.ReadAsStringAsync().Result;
         }
 
+        // update existing
+        //public void PutStoreProductNode(int productId, int storeId,)
+        //{
+        //
+        //}
+
         // users service consumming
 
-        public void RegisterUser(UserRegisterClientModel registerModel)
+        public string RegisterUser(UserRegisterClientModel registerModel)
         {
-            registerModel = new UserRegisterClientModel()
-            {
-                Username = "sample",
-                Password = "daipak",
-                StoreId = 2,
-            };
-
+            // hashing pass
             SHA1 sha1 = new SHA1Cng();
             byte[] passAsBytes = new byte[registerModel.Password.Length * sizeof(char)];
             Buffer.BlockCopy(registerModel.Password.ToCharArray(), 0, passAsBytes, 0, passAsBytes.Length);
@@ -100,13 +103,38 @@ namespace MelonStore.Client
 
             var result = response.Content.ReadAsStringAsync().Result;
 
-            //UserLoggedClientModel loggedUser = JsonConvert.DeserializeObject<UserLoggedClientModel>(result);
-
+            return result;
         }
 
-        //public string LoginUserGetSessionKey(UserLoginClientModel loginUser)
-        //{
-        //
-        //}
+        public string LoginUserGetSessionKey(UserLoginClientModel loginUser)
+        {
+
+            SHA1 sha1 = new SHA1Cng();
+            byte[] passAsBytes = new byte[loginUser.Password.Length * sizeof(char)];
+            Buffer.BlockCopy(loginUser.Password.ToCharArray(), 0, passAsBytes, 0, passAsBytes.Length);
+
+            byte[] sha1PassAsByte = sha1.ComputeHash(passAsBytes);
+
+            loginUser.Password = BitConverter.ToString(sha1PassAsByte).Replace("-", "");
+
+            HttpContent postContent = new StringContent(JsonConvert.SerializeObject(loginUser));
+            postContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            var response =
+                this.httpClient.PostAsync(MsClient.BASE + MsClient.USER_LOGIN, postContent).Result;
+
+            var result = response.Content.ReadAsStringAsync().Result;
+
+            UserLoggedClientModel loggedUser =
+                 JsonConvert.DeserializeObject<UserLoggedClientModel>(result);
+
+            return loggedUser.SessionKey;
+        }
+
+        public void Loggout(string sessionKey)
+        {
+            var response =
+                this.httpClient.PutAsync(MsClient.BASE + MsClient.USER_LOGOUT + sessionKey, null).Result;
+        }
     }
 }

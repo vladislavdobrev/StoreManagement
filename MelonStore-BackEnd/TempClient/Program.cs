@@ -17,8 +17,10 @@ namespace TempClient
 
             // var resultget =  client.GetAllProducts("xaxa");
             // var result = client.GetAllByFilters(null,"xaxa");
-            // client.PostStoreProductNode(null,"xaxa");
-            client.RegisterUser(null);
+            client.PostStoreProductNode(null,"xaxa");
+            // client.RegisterUser(null);
+            //client.LoginUserGetSessionKey(null);
+            //client.Loggout(null);
 
         }
     }

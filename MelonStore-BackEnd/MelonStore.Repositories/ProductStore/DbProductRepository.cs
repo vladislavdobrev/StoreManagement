@@ -86,8 +86,17 @@ namespace MelonStore.Repositories
 
         public ProductStore Add(ProductStore item)
         {
-            this.DbSet.Add(item);
-            this.Context.SaveChanges();
+            ProductStore exists = this.Get(item.Product_Id, item.Store_Id);
+            if (exists == null)
+            {
+
+                this.DbSet.Add(item);
+                this.Context.SaveChanges();
+            }
+            else
+            {
+                this.Update(item.Product_Id, item.Store_Id, item);
+            }
 
             return null;
         }

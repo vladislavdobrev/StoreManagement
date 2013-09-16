@@ -15,10 +15,11 @@ namespace MelonStore.Api.Controllers
     public class UsersController : BaseController
     {
         private readonly IUserRepository data;
-
+        private MelonStoreContext context;
         public UsersController()
         {
             this.data = new DbUsersRepository(new MelonStoreContext());
+            this.context = new MelonStoreContext();
         }
 
         public UsersController(IUserRepository repository)
@@ -46,9 +47,10 @@ namespace MelonStore.Api.Controllers
                 User user = model.ToUser();
 
                 var dbUser = this.data.Add(user);
+
                 var userLoggedModel = UserLoggedModel.CreateModel(dbUser);
 
-                var response = this.Request.CreateResponse(HttpStatusCode.Created);
+                var response = this.Request.CreateResponse(HttpStatusCode.Created, "User sucsessfully created.");
                 //var resourceLink = Url.Link("UsersGetApi", new { id = userLoggedModel.Id });
                 //response.Headers.Location = new Uri(resourceLink);
                 return response;
@@ -57,19 +59,18 @@ namespace MelonStore.Api.Controllers
 
         [HttpPost]
         [ActionName("login")]
-        public HttpResponseMessage LoginUser([FromBody]
-                                             UserLoginModel model)
+        public HttpResponseMessage LoginUser([FromBody] UserLoginModel model)
         {
             return base.PerformOperationAndHandleExceptions(() =>
             {
                 if (!ModelState.IsValid)
                 {
-                    throw new Exception("Invalid user login model!");
+                    this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid user login model!");
                 }
                 User dbUser = this.data.Get(model.Username);
                 if (dbUser == null || model.Password != dbUser.Password)
                 {
-                    throw new Exception("Invalid username or password!");
+                    this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid username or password!");
                 }
                 User loggedUser = this.data.LoginUser(dbUser);
                 UserLoggedModel loggedModel = UserLoggedModel.CreateModel(loggedUser);

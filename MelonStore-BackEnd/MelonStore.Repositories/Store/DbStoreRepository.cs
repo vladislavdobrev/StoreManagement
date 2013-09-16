@@ -32,5 +32,16 @@ namespace MelonStore.Repositories
 
             return all;
         }
+
+        public Store Get(int id)
+        {
+            Store dbStore = this.All().FirstOrDefault(x => x.Id == id);
+            if (dbStore == null)
+            {
+                throw new ArgumentNullException(String.Format("No such store!"));
+            }
+
+            return dbStore;
+        }
     }
 }
