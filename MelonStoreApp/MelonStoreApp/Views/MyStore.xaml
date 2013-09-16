@@ -3,16 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModels="clr-namespace:MelonStoreApp.ViewModels"
+             xmlns:views ="clr-namespace:MelonStoreApp.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+
     <UserControl.Resources>
         <Style TargetType="ToggleButton" x:Key="tagButton">
             <Setter Property="Margin" Value="10"/>
             <Setter Property="Padding" Value="10,3,10,3"/>
         </Style>
     </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewModels:MyStoreViewModel/>
+    </UserControl.DataContext>
     <StackPanel>
-        <WrapPanel >
+        <WrapPanel>
             <ToggleButton Content="All" Style="{StaticResource tagButton}"/>
             <ToggleButton Content="Female" Style="{StaticResource tagButton}"/>
             <ToggleButton Content="Male" Style="{StaticResource tagButton}"/>
@@ -22,17 +28,28 @@
             <ToggleButton Content="Blouses" Style="{StaticResource tagButton}"/>
         </WrapPanel>
 
-        <DataGrid x:Name="grid" AutoGenerateColumns="False">
+
+
+        <views:Product DataContext="{Binding ProductVM}">
+            
+        </views:Product>
+        <DataGrid x:Name="grid" AutoGenerateColumns="False" ItemsSource="{Binding Products}" SelectionMode="Single" SelectedItem="{Binding CurrentProduct, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id, Mode=TwoWay}"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name,Mode=TwoWay}"/>
-                <DataGridTextColumn Header="Brand" Binding="{Binding Brand,Mode=TwoWay}"/>
-                <DataGridTextColumn Header="Category" Binding="{Binding Category,Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Product.Id, Mode=TwoWay}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name,Mode=TwoWay}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Brand" Binding="{Binding Brand,Mode=TwoWay}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category,Mode=TwoWay}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price,Mode=TwoWay}"/>
                 <DataGridTextColumn Header="Amount" Binding="{Binding Amount,Mode=TwoWay}"/>
-
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn></DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
     </StackPanel>
 </UserControl>

@@ -11,6 +11,6 @@ namespace MelonStore.Repositories
         where T : class
     {
         IQueryable<T> All();
-        IQueryable<T> Get(Gender gender, Category category);
+        ICollection<T> Get(List<Gender> gender, List<Category> category);
     }
 }

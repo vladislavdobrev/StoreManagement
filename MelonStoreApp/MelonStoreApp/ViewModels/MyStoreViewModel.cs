@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using MelonStoreApp.Models;
 using System.Collections.ObjectModel;
+using System.Windows.Data;
 
 namespace MelonStoreApp.ViewModels
 {
@@ -49,7 +50,9 @@ namespace MelonStoreApp.ViewModels
             //    Category = "Shoes",
             //    Amount = 23
             //};
-            this.productVM = new ProductViewModel(CurrentProduct);
+            this.productVM = new ProductViewModel();
+            Binding b = new Binding();
+
         }
 
         public Visibility ProductInfoVisibility { get; set; }

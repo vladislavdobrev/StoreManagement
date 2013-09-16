@@ -33,18 +33,38 @@ namespace MelonStore.Repositories
             return all;
         }
 
-        public IQueryable<Product> Get(Gender gender, Category category)
+        public ICollection<Product> Get(List<Gender> genders, List<Category> categories)
         {
             IQueryable<Product> all = this.All();
 
-            IQueryable<Product> fitered =
-                (from product in all
-                 where product.Gender == gender &&
-                 product.Category == category
-                 select product
-                     );
 
-            return fitered;
+            ICollection<Product> filteredByGender = new HashSet<Product>();
+
+            foreach (var gender in genders)
+            {
+                foreach (var product in all)
+                {
+                    if (product.Gender == gender)
+                    {
+                        filteredByGender.Add(product);
+                    }
+                }
+            }
+
+            ICollection<Product> filteredByCategoryAndGender = new HashSet<Product>();
+
+            foreach (var category in categories)
+            {
+                foreach (var product in filteredByGender)
+                {
+                    if (product.Category == category)
+                    {
+                        filteredByCategoryAndGender.Add(product);
+                    }
+                }
+            }
+
+            return filteredByCategoryAndGender;
         }
     }
 }
