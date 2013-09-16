@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views ="clr-namespace:MelonStoreApp.Views"
              mc:Ignorable="d" 
             >
     <StackPanel>
         <StackPanel Orientation="Horizontal">
-            <Button Content="All" Margin="10"/>
+            <Button Content="All" Margin="10" Command="{Binding ShowAllProductsCommand}"/>
+
             <ItemsControl  ItemsSource="{Binding Categories}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -16,14 +18,15 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <ToggleButton Content="{Binding}" Margin="10"/>
+                        <ToggleButton Content="{Binding}" Margin="10" IsChecked="{Binding IsEnabled}" Command="{Binding FilterProductsCommand}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
 
+        <views:Product DataContext="{Binding CurrentProduct}"/>
 
-        <DataGrid ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserAddRows="False">
+        <DataGrid ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserAddRows="False" MaxHeight="300" CurrentItem="{Binding CurrentProduct, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id, Mode=TwoWay}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name,Mode=TwoWay}" IsReadOnly="True"/>

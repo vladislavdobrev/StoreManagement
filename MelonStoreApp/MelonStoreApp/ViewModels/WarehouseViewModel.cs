@@ -3,42 +3,61 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using MelonStoreApp.Models;
+using MelonStoreApp.Commands;
 
 namespace MelonStoreApp.ViewModels
 {
     public class WarehouseViewModel : ViewModelBase
     {
+        private Product currentProduct;
+
         public WarehouseViewModel()
         {
-            this.Categories = new ObservableCollection<string>{
-                "asd1", "asd2", "asd3"
-            };
+            var categories = Data.DataPersister.GetCategories();
+            this.Categories = new ObservableCollection<Category>();
 
-            this.Products = new ObservableCollection<Product>()
+            foreach (var category in categories)
             {
-                new Product{
-                    Id = 1,
-                    Name = "Black Shoes",
-                    Count = 23,
-                    Brand = "Bershka",
-                    Price = 119,
-                    Category = "Shoes",
-                    Amount = 23
-                },
-                new Product{
-                    Id = 1,
-                    Name = "Black Shoes",
-                    Count = 23,
-                    Brand = "Bershka",
-                    Price = 119,
-                    Category = "Shoes",
-                    Amount = 23
-                },
-            };
+                Categories.Add(new Category { Name = category, IsEnabled = true });
+            }
+
+            this.Products = Data.DataPersister.GetStoreProducts();
+
+            this.ShowAllProductsCommand = new RelayCommand(ShowAllProductsExecuteHandler);
         }
 
-
         public ObservableCollection<Product> Products { get; set; }
-        public ObservableCollection<string> Categories { get; set; }
+        public ObservableCollection<Category> Categories { get; set; }
+        public Commands.RelayCommand ShowAllProductsCommand { get; set; }
+        public Commands.RelayCommand FilterProductsCommand { get; set; }
+       
+        public Product CurrentProduct
+        {
+            get
+            {
+                return this.currentProduct;
+            }
+            set
+            {
+                if (this.currentProduct != value)
+                {
+                    this.currentProduct = value;
+                    OnPropertyChanged("CurrentProduct");
+                }
+            }
+        }
+
+        private void ShowAllProductsExecuteHandler(object obj)
+        {
+            foreach (var category in this.Categories)
+            {
+                category.IsEnabled = true;
+            }
+        }
+
+        private void FilterProductsExecuteHanler(object obj)
+        {
+
+        }
     }
 }

@@ -28,7 +28,7 @@
 
 
 
-        <views:Product DataContext="{Binding ProductVM}">
+        <views:Product DataContext="{Binding CurrentItem}">
             
         </views:Product>
         <DataGrid x:Name="grid" AutoGenerateColumns="False" ItemsSource="{Binding Products}" SelectionMode="Single" SelectedItem="{Binding CurrentProduct, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True">
