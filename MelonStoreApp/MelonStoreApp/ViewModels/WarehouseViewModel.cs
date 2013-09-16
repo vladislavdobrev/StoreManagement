@@ -173,7 +173,10 @@ namespace MelonStoreApp.ViewModels
         {
             if (this.OrderAmount > 0 && this.OrderPrice > 0)
             {
-                throw new NotImplementedException();
+                Product newProduct = this.CurrentProduct;
+                newProduct.Amount = this.OrderAmount;
+                newProduct.Price = this.OrderPrice;
+                CartViewModel.CartProducts.Add(newProduct);
             }
 
             IsOrdering = false;
