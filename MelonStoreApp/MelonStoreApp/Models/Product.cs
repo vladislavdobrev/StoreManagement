@@ -12,10 +12,8 @@
 
         public decimal Price { get; set; }
 
-        public string Category { get; set; }
+        public Category Category { get; set; }
 
-        public int Amount { get; set; }
-
-        public virtual Image Image { get; set; }
+        public virtual string ImageUrl { get; set; }
     }
 }

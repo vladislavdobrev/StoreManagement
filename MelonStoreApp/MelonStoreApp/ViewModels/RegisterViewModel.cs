@@ -28,7 +28,6 @@ namespace MelonStoreApp.ViewModels
 
         public RegisterViewModel()
         {
-            this.Stores = Data.DataPersister.GetStores();
             this.RegisterCommand = new Commands.RelayCommand(this.RegisterExecuteHandler);
             this.RegisterSuccessful = false;
         }

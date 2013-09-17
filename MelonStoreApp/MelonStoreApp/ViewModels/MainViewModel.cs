@@ -11,11 +11,11 @@ namespace MelonStoreApp.ViewModels
         {
             this.LoginVM = new ViewModels.LoginViewModel();
             this.RegisterVM = new ViewModels.RegisterViewModel();
-            this.HomeVM = new ViewModels.HomeViewModel();
+
 
             this.Login = new Views.Login { DataContext = this.LoginVM };
             this.Register = new Views.Register { DataContext = this.RegisterVM };
-            this.Home = new Views.Home() { DataContext = this.HomeVM };
+
 
             this.LoginVM.PropertyChanged += LoginVM_PropertyChanged;
             this.RegisterVM.PropertyChanged += RegisterVM_PropertyChanged;
@@ -28,6 +28,8 @@ namespace MelonStoreApp.ViewModels
             {
                 if ((this.RegisterVM as RegisterViewModel).RegisterSuccessful == true)
                 {
+                    this.HomeVM = new ViewModels.HomeViewModel();
+                    this.Home = new Views.Home() { DataContext = this.HomeVM };
                     this.CurrentView = this.Home;
                 }
 
@@ -42,6 +44,8 @@ namespace MelonStoreApp.ViewModels
                 case "IsUserLogged":
                     if ((this.LoginVM as LoginViewModel).IsUserLogged == true)
                     {
+                        this.HomeVM = new ViewModels.HomeViewModel();
+                        this.Home = new Views.Home() { DataContext = this.HomeVM };
                         this.CurrentView = this.Home;
                     }
                     return;
@@ -49,7 +53,7 @@ namespace MelonStoreApp.ViewModels
                     if ((this.LoginVM as LoginViewModel).IsRegistering == true)
                     {
                         this.CurrentView = this.Register;
-                    } 
+                    }
                     return;
             }
 

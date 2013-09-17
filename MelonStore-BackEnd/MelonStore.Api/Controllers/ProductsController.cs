@@ -39,9 +39,13 @@ namespace MelonStore.Api.Controllers
                  {
                      Id = currProduct.Id,
                      Name = currProduct.Name,
+                     Brand = currProduct.Brand,
+                     Category = currProduct.Category,
+                     BasePrice = currProduct.BasePrice,
+                     Gender = currProduct.Gender,
                      ImageUrl = currProduct.Image.Url,
                  }).ToList();
-        
+
             return this.Request.CreateResponse(HttpStatusCode.OK, products);
         }
 
@@ -107,7 +111,7 @@ namespace MelonStore.Api.Controllers
                     });
                 }
             }
-            
+
             return this.Request.CreateResponse(HttpStatusCode.OK, newProducts);
         }
     }

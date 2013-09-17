@@ -14,7 +14,8 @@ namespace MelonStore.Client
 {
     public class MsClient
     {
-        public const string PRODUCTS_GET_ALL = "/products/all?sessionKey=";
+        public const string PRODUCTS_GET_ALL_I = "/products/all?sessionKey=";
+        public const string PRODUCTS_GET_ALL_II = "&storeId=";
         public const string PRODUCTS_POST_FILTERED = "/products/postFiltered?sessionKey=";
         public const string STOREPRODUCT_ADD_NEW = "/storeproducts?sessionKey=";
         public const string USER_REGISTER = "/users/register";
@@ -43,7 +44,7 @@ namespace MelonStore.Client
         public ObservableCollection<ProductClientModel> GetAllProducts(string sessionKey)
         {
             var response =
-                this.httpClient.GetAsync(MsClient.BASE + MsClient.PRODUCTS_GET_ALL + sessionKey).Result;
+                this.httpClient.GetAsync(MsClient.BASE + MsClient.PRODUCTS_GET_ALL_I + sessionKey).Result;
 
             var result = response.Content.ReadAsStringAsync().Result;
 
@@ -59,7 +60,7 @@ namespace MelonStore.Client
         public ObservableCollection<ProductClientModel> AllNewProducts(string sessionKey)
         {
             var response =
-               this.httpClient.GetAsync(MsClient.BASE + MsClient.PRODUCTS_GET_ALL + sessionKey).Result;
+               this.httpClient.GetAsync(MsClient.BASE + MsClient.PRODUCTS_GET_ALL_I + sessionKey).Result;
 
             var result = response.Content.ReadAsStringAsync().Result;
 
@@ -130,15 +131,16 @@ namespace MelonStore.Client
             var result = response.Content.ReadAsStringAsync().Result;
         }
 
-        public ObservableCollection<StoreProductClientModel> GetAllStoreProducts(string sessionKey)
+        public ObservableCollection<StoreProductClientFullDescModel> GetAllStoreProducts(string sessionKey, int storeId)
         {
             var response =
-                this.httpClient.GetAsync(MsClient.BASE + MsClient.STOREPRODUCT_GET_ALL).Result;
+                this.httpClient.GetAsync(MsClient.BASE + MsClient.STOREPRODUCT_GET_ALL +
+                sessionKey + MsClient.PRODUCTS_GET_ALL_II + storeId).Result;
 
             var result = response.Content.ReadAsStringAsync().Result;
 
-            ObservableCollection<StoreProductClientModel> all =
-                JsonConvert.DeserializeObject<ObservableCollection<StoreProductClientModel>>(result);
+            ObservableCollection<StoreProductClientFullDescModel> all =
+                JsonConvert.DeserializeObject<ObservableCollection<StoreProductClientFullDescModel>>(result);
 
             return all;
         }

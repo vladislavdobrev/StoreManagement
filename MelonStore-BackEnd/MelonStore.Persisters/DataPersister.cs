@@ -22,7 +22,7 @@ namespace MelonStore.Persisters
 
         // products
 
-        public static ObservableCollection<ProductClientModel> GetAllProducts(string sessionKey)
+        public static ObservableCollection<ProductClientModel> GetAllProducts()
         {
             ObservableCollection<ProductClientModel> allProducts =
                 httpClient.GetAllProducts(sessionKey);
@@ -56,7 +56,7 @@ namespace MelonStore.Persisters
             {
                 return result.Username;
             }
-            storeId = result.StoreId;
+            storeId = result.StoreId + 1;
             sessionKey = result.SessionKey;
 
             return null;
@@ -66,10 +66,17 @@ namespace MelonStore.Persisters
 
         public static ObservableCollection<ProductClientModel> GetAllStoreProducts()
         {
-            ObservableCollection<ProductClientModel> result =
-                httpClient.GetAllProducts(sessionKey);
+            ObservableCollection<StoreProductClientFullDescModel> result =
+                httpClient.GetAllStoreProducts(sessionKey, storeId);
 
-            return result;
+            ObservableCollection<ProductClientModel> productsInStore = new ObservableCollection<ProductClientModel>();
+
+            foreach (var node in result)
+            {
+                productsInStore.Add(node.Product);
+            }
+
+            return productsInStore;
         }
 
         public static void AddNewProductToStore(StoreProductClientFullDescModel newNode)
@@ -86,6 +93,8 @@ namespace MelonStore.Persisters
         {
             ObservableCollection<StoreClientModel> result =
                 httpClient.GetAllStores(sessionKey);
+
+
 
             return result;
         }

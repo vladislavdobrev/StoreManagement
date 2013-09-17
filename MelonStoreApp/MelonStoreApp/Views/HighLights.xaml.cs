@@ -11,14 +11,14 @@ namespace MelonStoreApp.Views
         public Highlights()
         {
             InitializeComponent();
-            this.forDiscount.ItemsSource = new List<Models.Product>()
-            {
-                new Models.Product { Id = 1, Name = "asd", Brand = "Nike", Category = "asd", Price = 123, Amount = 10 },
-            };
-            this.forOrder.ItemsSource = new List<Models.Product>()
-            {
-                new Models.Product { Id = 1, Name = "asd", Brand = "Nike", Category = "asd", Price = 123, Amount = 10 },
-            };
+            //this.forDiscount.ItemsSource = new List<Models.Product>()
+            //{
+            //    new Models.Product { Id = 1, Name = "asd", Brand = "Nike", Category = "asd", Price = 123, Amount = 10 },
+            //};
+            //this.forOrder.ItemsSource = new List<Models.Product>()
+            //{
+            //    new Models.Product { Id = 1, Name = "asd", Brand = "Nike", Category = "asd", Price = 123, Amount = 10 },
+            //};
         }
     }
 }

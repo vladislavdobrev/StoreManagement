@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\Category.cs" />
+    <Compile Include="Enums\Gender.cs" />
     <Compile Include="FiltrationModel.cs" />
     <Compile Include="ProductClientModel.cs" />
     <Compile Include="StoreClientModel.cs" />

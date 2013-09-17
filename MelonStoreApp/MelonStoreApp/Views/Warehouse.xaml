@@ -35,6 +35,7 @@
                 <DataGridTextColumn Header="Brand" Binding="{Binding Brand,Mode=TwoWay}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Category" Binding="{Binding Category,Mode=TwoWay}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="BasePrice" Binding="{Binding BasePrice,Mode=TwoWay}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Gender" Binding="{Binding Gender,Mode=TwoWay}" IsReadOnly="True"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

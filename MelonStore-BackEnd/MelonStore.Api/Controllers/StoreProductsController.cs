@@ -65,7 +65,7 @@ namespace MelonStore.Api.Controllers
 
 
         [ActionName("all")]
-        public HttpResponseMessage GetAll(string sessionKey)
+        public HttpResponseMessage GetAll(string sessionKey, int storeId)
         {
             if (String.IsNullOrEmpty(sessionKey))
             {
@@ -75,6 +75,7 @@ namespace MelonStore.Api.Controllers
             ICollection<ProductStore> dbProducts = this.repo.All().ToList();
             ICollection<ProductStoreApiFullDescModel> convertedProducts =
                 (from currDbProduct in dbProducts
+                 where currDbProduct.Store_Id == storeId
                  select new ProductStoreApiFullDescModel()
                  {
                      Count = currDbProduct.Count,
@@ -83,7 +84,7 @@ namespace MelonStore.Api.Controllers
                      Product = new ProductApiModel()
                      {
                          Name = currDbProduct.Product.Name,
-                         ImageUrl = currDbProduct.Product.Image.Url,
+                         //ImageUrl = currDbProduct.Product.Image.Url,
                          Id = currDbProduct.Product.Id,
                          Gender = currDbProduct.Product.Gender,
                          BasePrice = currDbProduct.Product.BasePrice,
@@ -114,11 +115,11 @@ namespace MelonStore.Api.Controllers
                 {
                     Name = dbProduct.Product.Name,
                     ImageUrl = dbProduct.Product.Image.Url,
-                     Brand = dbProduct.Product.Brand,
-                      Category = dbProduct.Product.Category,
-                       BasePrice = dbProduct.Product.BasePrice,
-                        Gender = dbProduct.Product.Gender,
-                         Id = dbProduct.Product.Id
+                    Brand = dbProduct.Product.Brand,
+                    Category = dbProduct.Product.Category,
+                    BasePrice = dbProduct.Product.BasePrice,
+                    Gender = dbProduct.Product.Gender,
+                    Id = dbProduct.Product.Id
                 },
             };
             return this.Request.CreateResponse(HttpStatusCode.OK, convertedProduct);

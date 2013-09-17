@@ -4,13 +4,15 @@ using System.Collections.ObjectModel;
 using MelonStoreApp.Models;
 using MelonStoreApp.Commands;
 using System.Windows;
+using MelonStore.Persisters;
+using MelonStoreClient.Models;
 
 namespace MelonStoreApp.ViewModels
 {
     public class WarehouseViewModel : ViewModelBase
     {
         private Product lastCurrentProduct;
-        private Product currentProduct;
+        private ProductClientModel currentProduct;
         private Visibility isInfoVisible;
         private bool isOrdering;
 
@@ -20,15 +22,15 @@ namespace MelonStoreApp.ViewModels
 
         public WarehouseViewModel()
         {
-            var categories = Data.DataPersister.GetCategories();
-            this.Categories = new ObservableCollection<Category>();
+            //var categories = DataPersister.GetAllProducts();
+            //this.Categories = new ObservableCollection<Category>();
 
-            foreach (var category in categories)
-            {
-                Categories.Add(new Category { Name = category, IsEnabled = true });
-            }
+            //foreach (var category in categories)
+            //{
+            //    Categories.Add(new Category { Name = category, IsEnabled = true });
+            //}
 
-            this.Products = Data.DataPersister.GetStoreProducts();
+            this.Products = DataPersister.GetAllProducts();
 
             this.ShowAllProductsCommand = new RelayCommand(ShowAllProductsExecuteHandler);
             this.HideInfoCommand = new RelayCommand(HideInfoExecuteHandler);
@@ -40,7 +42,7 @@ namespace MelonStoreApp.ViewModels
             this.IsOrdering = false;
         }
         
-        public ObservableCollection<Product> Products { get; set; }
+        public ObservableCollection<ProductClientModel> Products { get; set; }
 
         public ObservableCollection<Category> Categories { get; set; }
 
@@ -87,7 +89,7 @@ namespace MelonStoreApp.ViewModels
             }
         }
 
-        public Product CurrentProduct
+        public ProductClientModel CurrentProduct
         {
             get
             {
@@ -106,14 +108,13 @@ namespace MelonStoreApp.ViewModels
                     {
                         this.LastCurrentProduct = new Product()
                         {
-                            Amount = value.Amount,
                             Brand = value.Brand,
-                            Category = value.Category,
+                            //Category = value.Category,
                             Count = value.Count,
                             Id = value.Id,
-                            Image = value.Image,
+                            //Image = value.Image,
                             Name = value.Name,
-                            Price = value.Price
+                            Price = value.BasePrice
                         };
                     }
                     OnPropertyChanged("CurrentProduct");
@@ -204,7 +205,7 @@ namespace MelonStoreApp.ViewModels
             if (this.OrderAmount > 0 && this.OrderPrice > 0)
             {
                 Product newProduct = this.LastCurrentProduct;
-                newProduct.Amount = this.OrderAmount;
+                newProduct.Count = this.OrderAmount;
                 newProduct.Price = this.OrderPrice;
                 CartViewModel.AddProduct(newProduct);
             }
